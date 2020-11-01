@@ -45,7 +45,7 @@ const Layout = (props) => {
         ></script>
       </Head>
       <Navbar sessionUser={props.session} />
-      <div className="container-md">{props.children}</div>
+        {props.children}
       <Footer />
     </>
   );

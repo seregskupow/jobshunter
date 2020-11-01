@@ -1,0 +1,9 @@
+@import '../../../styles/utils/media';
+.main__container_inner{
+    width:100%;
+    max-width:975px;
+    margin:0 auto;
+    @include media('sm'){
+        
+    }
+}

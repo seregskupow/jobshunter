@@ -13,6 +13,9 @@ module.exports = withPlugins(
     }]
   ],
   {
-    /* global config */
+    env:{
+      GOOGLE_ID:process.env.GOOGLE_ID,
+      FACEBOOK_ID:process.env.FACEBOOK_ID
+    }
   }
 )

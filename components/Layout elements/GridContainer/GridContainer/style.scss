@@ -1,0 +1,9 @@
+@import '../../../../styles/utils/media';
+.grid__container{
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: 1fr;
+    @include media('sm'){
+        grid-template-columns: minmax(752px,936px) minmax(160px,1fr);
+    }
+}
