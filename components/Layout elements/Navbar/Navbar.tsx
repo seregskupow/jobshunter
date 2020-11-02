@@ -1,9 +1,10 @@
 import "./style.scss";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/client";
-import Link from "next/link";
+import {Link} from '../../../i18n';
 import { useRouter } from 'next/router'
 import Router from 'next/router';
+import LanguageSwitcher from "../../Components/LanguageSwitcher";
 export default function Navbar({ sessionUser }) {
   const router = useRouter()
   const searchParam = router.query.search === undefined ? "Type search..." :router.query.search;
@@ -124,6 +125,9 @@ export default function Navbar({ sessionUser }) {
               onKeyDown = {onSearchSubmit}
             />
           </div>
+        </li>
+        <li>
+          <LanguageSwitcher />
         </li>
       </ul>
     </nav>

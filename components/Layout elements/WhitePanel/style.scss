@@ -1,0 +1,12 @@
+@import '../../../styles/utils/borders';
+@import '../../../styles/utils/colors.scss';
+@import '../../../styles/utils/shadows.scss';
+
+.white__panel{
+
+    background-color:$white;
+
+    border-radius: $panelsBRD;
+
+    box-shadow: $mediumShadow;
+}

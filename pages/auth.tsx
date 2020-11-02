@@ -6,6 +6,7 @@ import MainContainer from "../components/Layout elements/MainContainer";
 import GridContainer from "../components/Layout elements/GridContainer/GridContainer";
 import GridColumn from "../components/Layout elements/GridContainer/GridColumn";
 import CenteredContainer from "../components/Layout elements/CenteredContainer";
+import WhitePanel from "../components/Layout elements/WhitePanel";
 const auth = () => {
   const router = useRouter();
   const responseGoogle = (response) => {
@@ -19,6 +20,7 @@ const auth = () => {
       <h1>sign in/sign up</h1>
 
       <CenteredContainer>
+        <WhitePanel width={100}>
         <div className="card bg-dark">
           <div
             className="card-body d-flex flex-column justify-content-around"
@@ -38,6 +40,7 @@ const auth = () => {
             />
           </div>
         </div>
+        </WhitePanel>
       </CenteredContainer>
     </MainContainer>
   );
