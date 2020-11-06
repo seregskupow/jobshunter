@@ -1,4 +1,60 @@
-.is-active{
-    background: #000;
-        color: #fff;
+@import "../../../styles/utils/colors";
+
+.language-switcher {
+    text-align: center;
+}
+
+.language-switcher fieldset {
+    display: inline-block;
+    position: relative;
+    padding: 2px;
+    border-radius: 50em;
+    border: 2px solid $white;
+}
+
+.language-switcher input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.language-switcher {
+    & label {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        float: left;
+        width: 40px;
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+        font-size: 1rem;
+        color: $white;
+        transition: color 0.1s ease;
+        border-radius: 50em;
+    }
+    & .lang-toggled {
+        color: $black !important;
+    }
+}
+
+.language-switcher .switch {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 30px;
+    width: 40px;
+    background-color: $white;
+    border-radius: 50em;
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+.language-switcher input[type="radio"]:checked + label + .switch,
+.language-switcher input[type="radio"]:checked + label:nth-of-type(n) + .switch {
+    -webkit-transform: translateX(40px);
+    -moz-transform: translateX(40px);
+    -ms-transform: translateX(40px);
+    -o-transform: translateX(40px);
+    transform: translateX(40px);
 }

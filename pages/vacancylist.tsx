@@ -74,4 +74,4 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   };
 };
-export default withTranslation()(vacancylist)
+export default withTranslation('common')(vacancylist)

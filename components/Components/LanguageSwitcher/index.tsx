@@ -11,10 +11,17 @@ function LanguageSwitcher(){
         color:" #fff",
     }
     return(
-        <WhitePanel>
-            <button type="button" onClick={() => i18n.changeLanguage('ua')} className={language === 'ua' ? 'is-active': ''}>UA</button>
-            <button type="button" onClick={() => i18n.changeLanguage('ru')} className={language === 'ru' ? 'is-active': ''}>RU</button>
-        </WhitePanel>
+        <div className="language-switcher">
+            <fieldset>
+				<input type="radio" name="duration-1" value="monthly" id="monthly-1" onClick={() => i18n.changeLanguage('ua')} />
+				<label htmlFor="monthly-1" className={`${language === 'ua' ? 'lang-toggled': ''}`}>УКР</label>
+				<input type="radio" name="duration-1" value="yearly" id="yearly-1" onClick={() => i18n.changeLanguage('ru')} />
+				<label htmlFor="yearly-1" className={`${language === 'ru' ? 'lang-toggled': ''}`}>РУС</label>
+				<span className="switch"></span>
+			</fieldset>
+            {/* <button type="button" onClick={() => i18n.changeLanguage('ua')} className={language === 'ua' ? 'is-active': ''}>UA</button>
+            <button type="button" onClick={() => i18n.changeLanguage('ru')} className={language === 'ru' ? 'is-active': ''}>RU</button> */}
+        </div>
     )
 }
 

@@ -1,0 +1,28 @@
+@import '../../../styles/utils/colors';
+@import '../../../styles/utils/shadows';
+.square-link{
+    text-decoration: none;
+    font-size:2rem;
+    line-height: 2rem;
+    padding:5px 10px;
+    transition: .3s ease-in-out;
+    box-shadow: $mediumShadow;
+    &:hover{
+        box-shadow: $smallShadow;
+    }
+}
+.square-link_black{
+    background:$black;
+    color:$white;
+    &:hover{
+        filter:brightness(1.2);
+    }
+}
+.square-link_white{
+    background:$white;
+    color:$black;
+    &:hover{
+        filter:brightness(0.8);
+    }
+    
+}

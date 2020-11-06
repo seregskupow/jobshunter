@@ -14,7 +14,7 @@ function Home({t}) {
       <GridContainer>
         <GridColumn>
           <WhitePanel width={100}>
-            <p>
+            <p style={{fontSize:"2rem"}}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
               sed sit autem, impedit inventore necessitatibus illo, ut rem
               laborum exercitationem suscipit quas vitae doloribus enim?
@@ -27,7 +27,7 @@ function Home({t}) {
         </GridColumn>
         <GridColumn>
           <WhitePanel width={100}>
-            <p>
+            <p style={{fontSize:"2rem"}}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Reprehenderit optio quam doloremque eos, molestias iste culpa
               assumenda praesentium labore nulla iusto quas perspiciatis qui

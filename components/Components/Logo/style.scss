@@ -1,0 +1,14 @@
+@import '../../../styles/utils/colors';
+.logo{
+    font-size: 5rem;
+    font-weight: 300;
+    & span{
+        font-weight: bold;
+    }
+}
+.logo_white{
+    color:$white;
+}
+.logo_black{
+    color:$black;
+}

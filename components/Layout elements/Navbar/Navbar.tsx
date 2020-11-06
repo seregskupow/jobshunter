@@ -1,11 +1,14 @@
 import "./style.scss";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/client";
-import {Link} from '../../../i18n';
+import {Link, withTranslation} from '../../../i18n';
 import { useRouter } from 'next/router'
 import Router from 'next/router';
 import LanguageSwitcher from "../../Components/LanguageSwitcher";
-export default function Navbar({ sessionUser }) {
+import SquareLink from "../../Components/SquareLink";
+import Logo from "../../Components/Logo";
+import Search from "../../Components/Search";
+function Navbar({ t }) {
   const router = useRouter()
   const searchParam = router.query.search === undefined ? "Type search..." :router.query.search;
   const [session, loading] = useSession();
@@ -94,42 +97,25 @@ export default function Navbar({ sessionUser }) {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-      <a className="navbar-brand text-white" href="#">
-        JobsHunter
-      </a>
-      <ul className="nav">
-        {links.map((link) => (
-          <li className="nav-item" key={Math.random()}>
-            <Link href={link.link}>
-              <a className="nav-link">{link.name}</a>
-            </Link>
-          </li>
-        ))}
-        {shouldUserAuth()}
-        <li className="nav-item">
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="inputGroup-sizing-default">
-                Default
-              </span>
-            </div>
-            <input
-              type="text"
-              className="form-control"
-              placeholder ={"Type search here..."}
-              value = {searchValue}
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-default"
-              onChange ={event=>onInputChange(event.target.value)}
-              onKeyDown = {onSearchSubmit}
-            />
+    <header>
+        <div className="header__top">
+          <div className="header__inner header__inner__top__inner">
+          <LanguageSwitcher/>
+          <ul className="hot-links">
+            <li className="hot-links__item"><Link href="/"><a className="hot-links__item__link">🔥{t("navBar:hotLink")}</a></Link></li>
+            <li className="hot-links__item"><Link href="/"><a className="hot-links__item__link">{t("navBar:placeResume")}</a></Link></li>
+          <li className="hot-links__item"><SquareLink to={"/auth"} color={"white"} title={t("navBar:loginBtn")}/></li>
+          </ul>
           </div>
-        </li>
-        <li>
-          <LanguageSwitcher />
-        </li>
-      </ul>
-    </nav>
+        </div>
+        <div className="header__bottom">
+          <div className="header__inner header__inner__bottom__inner">
+            <Logo color={"white"}/>
+            <Search />
+          </div>
+        </div>
+    </header>
   );
 }
+
+export default withTranslation('navBar')(Navbar);

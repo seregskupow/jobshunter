@@ -3,7 +3,7 @@
 @import '../../../styles/utils/shadows.scss';
 
 .white__panel{
-
+    box-sizing: border-box;
     background-color:$white;
 
     border-radius: $panelsBRD;
