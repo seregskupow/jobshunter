@@ -1,0 +1,34 @@
+@import '../../../styles/utils/colors';
+@import '../../../styles/utils/borders';
+@import '../../../styles/utils/shadows';
+.search{
+    width: 100%;
+    height:40px;
+}
+.search__field{
+    height:100%;
+    width:100%;
+    & input[type="search"]{
+        height:100%;
+        width: 100%;
+
+        font-size: 18px;
+
+        background-color: $lightGrey;
+
+        border:none;
+        border-radius:$blocksBRD;
+
+        padding:0 0 0 15px;
+
+        box-shadow: none;
+
+        transition: all .3s ease;
+
+        position: relative;
+        &:focus{
+            background-color: $white;
+            box-shadow: $smallShadow;
+        }
+    }   
+}

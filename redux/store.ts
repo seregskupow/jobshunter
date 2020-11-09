@@ -3,8 +3,12 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
 import { useMemo } from 'react'
 import rootReducer from './reducers/rootReducer';
+import {DEFAULT_STATE} from './reducers/authReducer';
 
-function initStore(initialState) {
+const INITIAL_STATE = {
+  user:DEFAULT_STATE
+}
+function initStore(initialState = INITIAL_STATE) {
     return createStore(
         rootReducer,
         initialState,
@@ -12,7 +16,7 @@ function initStore(initialState) {
     )
   }
   let store;
-  export const initializeStore = (preloadedState) => {
+  export const initializeStore = (preloadedState = INITIAL_STATE) => {
     let _store = store ?? initStore(preloadedState)
   
     // After navigating to a page with an initial Redux state, merge that state

@@ -4,23 +4,19 @@ type defaultState = {
     isAuthenticated:boolean,
     errorMessage:string,
     userName:string,
-    lastSearchKey:string
+    lastSearchKey?:string,
+    userAvatar?:string
 }
-type actionPayload = {
-    isAuthenticated?:boolean,
-    errorMessage?:string,
-    userName?:string,
-    lastSearchKey?:string
-}   
 type action = {
     type:string,
-    payload:actionPayload
+    payload:defaultState
 }
-const DEFAULT_STATE:defaultState = {
+export const DEFAULT_STATE:defaultState = {
     isAuthenticated: false,
     errorMessage: '',
     userName:null,
-    lastSearchKey:''
+    lastSearchKey:'',
+    userAvatar:''
   }
   
   export default (state = DEFAULT_STATE, {type,payload}:action) => {
@@ -28,7 +24,7 @@ const DEFAULT_STATE:defaultState = {
       case t.AUTH_SIGN_UP:
         return { ...state, isAuthenticated: true, errorMessage: '' }
       case t.AUTH_SIGN_IN:
-        return { ...state, isAuthenticated: true, errorMessage: '' }
+        return { ...state, isAuthenticated: payload.isAuthenticated,userName:payload.userName,userAvatar:payload.userAvatar, errorMessage: '' }
       case t.AUTH_SIGN_OUT:
         return { ...state, isAuthenticated: false, errorMessage: '' }
       case t.AUTH_ERROR:

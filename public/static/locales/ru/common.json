@@ -1,4 +1,5 @@
 {
     "common":"sadsa",
-    "title":"Привет"
+    "title":"Привет",
+    "searchPlaceholder":"Начните вводить запрос, категорию..."
 }

@@ -8,6 +8,7 @@ import LanguageSwitcher from "../../Components/LanguageSwitcher";
 import SquareLink from "../../Components/SquareLink";
 import Logo from "../../Components/Logo";
 import Search from "../../Components/Search";
+import AccountBtn from "../../Components/AccountBtn";
 function Navbar({ t }) {
   const router = useRouter()
   const searchParam = router.query.search === undefined ? "Type search..." :router.query.search;
@@ -104,14 +105,18 @@ function Navbar({ t }) {
           <ul className="hot-links">
             <li className="hot-links__item"><Link href="/"><a className="hot-links__item__link">🔥{t("navBar:hotLink")}</a></Link></li>
             <li className="hot-links__item"><Link href="/"><a className="hot-links__item__link">{t("navBar:placeResume")}</a></Link></li>
-          <li className="hot-links__item"><SquareLink to={"/auth"} color={"white"} title={t("navBar:loginBtn")}/></li>
+          <li className="hot-links__item"><AccountBtn/></li>
           </ul>
           </div>
         </div>
         <div className="header__bottom">
           <div className="header__inner header__inner__bottom__inner">
+            <div className="bottom__inner__item">
             <Logo color={"white"}/>
+            </div>
+            <div className="bottom__inner__item">
             <Search />
+            </div>
           </div>
         </div>
     </header>
