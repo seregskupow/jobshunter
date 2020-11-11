@@ -2,6 +2,7 @@
 .main__container_inner{
     width:95%;
     max-width:975px;
+    height:100%;
     margin:0 auto;
     @include media('sm'){
         

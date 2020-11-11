@@ -1,0 +1,53 @@
+@import '../../../../styles/utils/colors';
+@import '../../../../styles/utils/borders';
+@import '../../../../styles/utils/shadows';
+.provider__buttons__container{
+    width: 100%;
+    max-width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    padding: 10px;
+}
+.provider__btn{
+    width:100%;
+    
+    height:50px;
+
+    display: flex;
+    align-items: center;
+
+    border:none;
+    border-radius: 15px;
+
+    background:$white;
+
+    box-shadow: $mediumShadow;
+
+    transition: all .4s ease;
+
+    cursor: pointer;
+    &:not(:last-child){
+        margin-bottom:15px;
+    }
+    &:hover{
+        box-shadow: $smallShadow;
+    }
+    .provider__logo{
+        width: 20%;
+    }
+    & svg{
+        max-width: 40px;
+        height: auto;
+    }
+    & span{
+        width:60%;
+        text-align: center;
+        font-size:2rem;
+        font-weight: bold;
+    }
+}

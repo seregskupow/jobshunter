@@ -3,11 +3,12 @@
 @import '../../../styles/utils/shadows';
 .user__not-auth{
     height:40px;
-    width: 40px;
+
+    padding:0 5px;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 
     background-color:#3f3f3f;
 
@@ -15,6 +16,13 @@
     
     color:$white;
     font-size:20px;
+    & svg{
+        margin-right:5px;
+    }
+    transition: background .3s ease;
+    &:hover{
+        background:#4e4e4e;
+    }
 }
 .user__acount__dropdown{
     height: 40px;

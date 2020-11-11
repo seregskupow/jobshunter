@@ -1,17 +1,25 @@
 import "./style.scss";
 import { GetServerSideProps } from "next";
 import Router, { useRouter } from "next/router";
-import { useState } from "react";
-import {withTranslation } from '../../../i18n'
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { withTranslation } from "../../../i18n";
 
-function Search({t}) {
+function Search({ t }) {
   const router = useRouter();
+  const defaultSearchParam = useSelector((state) => state.user.lastSearchKey);
+  console.log({ defaultSearchParam });
   const searchParam =
-    router.query.search === undefined ? null : router.query.search;
+    router.query.search === undefined
+      ? defaultSearchParam
+      : router.query.search;
   const [searchValue, setSearch] = useState(searchParam);
   const onInputChange = (value: string) => {
     setSearch(value);
   };
+  useEffect(() => {
+    defaultSearchParam !== undefined && setSearch(defaultSearchParam)
+  }, [defaultSearchParam,setSearch]);
   const onSearchSubmit = (e) => {
     if (e.key === "Enter") {
       Router.push({
@@ -23,15 +31,15 @@ function Search({t}) {
   return (
     <div className="search">
       <div className="search__field">
-      <input
-        type="search"
-        placeholder={t("searchPlaceholder")}
-        value={searchValue}
-        onKeyDown={(e) => onSearchSubmit(e)}
-        onChange={(e) => onInputChange(e.target.value)}
-        name=""
-        id=""
-      />
+        <input
+          type="search"
+          placeholder={t("searchPlaceholder")}
+          value={searchValue}
+          onKeyDown={(e) => onSearchSubmit(e)}
+          onChange={(e) => onInputChange(e.target.value)}
+          name=""
+          id=""
+        />
       </div>
     </div>
   );

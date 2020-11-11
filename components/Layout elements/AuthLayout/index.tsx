@@ -1,9 +1,7 @@
+import './style.scss';
 import Head from "next/head";
-import Footer from "../Footer/Footer";
-import Navbar from "../Navbar/Navbar";
-const Layout = (props) => {
-  return (
-    <>
+export default function AuthLayout(props){
+    return (<>
       <Head>
         <title>JobsHunter</title>
         <meta charSet="utf-8" />
@@ -44,10 +42,12 @@ const Layout = (props) => {
           crossOrigin="anonymous"
         ></script>
       </Head>
-      <Navbar />
-        {props.children}
-      <Footer />
-    </>
-  );
-};
-export default Layout;
+    <div className="auth__container">
+        <div className="auth__container__inner">
+        {props.children}   
+        </div>
+             
+    </div>
+        
+    </>)
+}

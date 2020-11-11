@@ -1,0 +1,46 @@
+@import '../../../../styles/utils/colors';
+@import '../../../../styles/utils/media';
+@import '../../../../styles/utils/shadows';
+@import '../../../../styles/utils/borders';
+.login__form{
+    width:100%;
+
+    display:flex;
+    justify-content: space-between; 
+}
+.login__form__left{
+    display:none;
+
+    height:500px;
+
+    justify-content: center;
+    align-items: center;
+    
+    background:url('/images/auth/leftSideBg.png');
+    background-repeat: no-repeat;
+     background-size: cover;
+    background-color:$black;
+
+    color:$white;
+    text-align: center;
+    font-size:3rem;
+
+    box-shadow:$mediumShadow;
+    @include media('sm'){
+        display:flex;
+        width:50%;
+    }
+}
+.login__form__right{
+    width:100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 20px;
+    @include media('sm'){
+        width:50%;
+    }
+}

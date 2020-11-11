@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import {withTranslation } from '../i18n'
 import dynamic from "next/dynamic";
 import Router from "next/router";
+import Layout from "../components/Layout elements/Layout/Layout";
 import MainContainer from "../components/Layout elements/MainContainer";
 import GridContainer from "../components/Layout elements/GridContainer/GridContainer";
 import GridColumn from "../components/Layout elements/GridContainer/GridColumn";
@@ -47,4 +48,5 @@ Home.getInitialProps = async () => {
       namespacesRequired: ['common','indexPage']
   }
 }
+Home.Layout = Layout;
 export default withTranslation()(Home);

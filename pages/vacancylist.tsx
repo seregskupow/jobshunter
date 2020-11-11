@@ -74,4 +74,5 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   };
 };
+vacancylist.Layout = Layout;
 export default withTranslation('common')(vacancylist)

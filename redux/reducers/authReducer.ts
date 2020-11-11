@@ -24,7 +24,7 @@ export const DEFAULT_STATE:defaultState = {
       case t.AUTH_SIGN_UP:
         return { ...state, isAuthenticated: true, errorMessage: '' }
       case t.AUTH_SIGN_IN:
-        return { ...state, isAuthenticated: payload.isAuthenticated,userName:payload.userName,userAvatar:payload.userAvatar, errorMessage: '' }
+        return { ...state, isAuthenticated: payload.isAuthenticated,userName:payload.userName,userAvatar:payload.userAvatar,lastSearchKey:payload.lastSearchKey, errorMessage: '' }
       case t.AUTH_SIGN_OUT:
         return { ...state, isAuthenticated: false, errorMessage: '' }
       case t.AUTH_ERROR:

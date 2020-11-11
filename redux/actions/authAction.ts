@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as t from '../types';
+import Router from 'next/router'
 
 export const oauthGoogle = data => {
     return async dispatch => {
@@ -35,6 +36,7 @@ export const oauthFacebook = data => {
           type: t.AUTH_SIGN_UP,
           payload:json
         });
+        
       } catch(err) {
         dispatch({
           type: t.AUTH_ERROR,
@@ -44,15 +46,17 @@ export const oauthFacebook = data => {
     };
   }
   
-  export const signIn = data => {
+  export const signIn = (data) => {
     return async dispatch => {
       try {
-        const json = await axios.post('http://localhost:5000/users/signin', data);
-  
+        // const json = await axios.post('http://localhost:5000/users/signin', data);
+        console.log('im triggered')
+        console.log(data)
         dispatch({
           type: t.AUTH_SIGN_IN,
-          payload:json
+          payload:data
         });
+        // Router.push('/');
       } catch(err) {
         dispatch({
           type: t.AUTH_ERROR,

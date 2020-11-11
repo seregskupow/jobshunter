@@ -1,5 +1,6 @@
 {
     "common":"sadsa",
     "title":"Привет",
-    "searchPlaceholder":"Начните вводить запрос, категорию..."
+    "searchPlaceholder":"Начните вводить запрос, категорию...",
+    "authPrompt":"Войти"
 }

@@ -1,10 +1,10 @@
 import "./style.scss";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "../../../i18n";
+import { Link ,withTranslation} from "../../../i18n";
 import { FaUser } from "react-icons/fa";
 import { CgChevronDown } from "react-icons/cg";
-export default function AccountBtn() {
+function AccountBtn({t}) {
   const isAuth: boolean = useSelector((state) => state.user.isAuthenticated);
   const userName: string = useSelector((state) => state.user.userName);
   const userAvatar: string = useSelector((state) => state.user.userAvatar);
@@ -23,10 +23,11 @@ export default function AccountBtn() {
   };
   if (!isAuth) {
     return (
-      <Link href="/auth">
+      <Link href="/auth/login">
         <a>
           <div className="user__not-auth">
             <FaUser />
+            <span>{t("authPrompt")}</span>
           </div>
         </a>
       </Link>
@@ -50,6 +51,8 @@ export default function AccountBtn() {
     );
   }
 }
+export default withTranslation()(AccountBtn);
+
 type shortLogo = {
   userName: string;
 };
