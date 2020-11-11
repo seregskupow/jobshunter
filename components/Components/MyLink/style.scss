@@ -1,0 +1,18 @@
+@import '../../../styles/utils/colors';
+.underline__link{
+    font-size: 2rem;
+    font-weight: bold;
+
+    &:hover{
+        text-decoration: underline;
+    }
+}
+.underline__link_blue{
+    color:$blue;
+}
+.underline__link_white{
+    color:$white
+}
+.underline__link_black{
+    color:$black;
+}   

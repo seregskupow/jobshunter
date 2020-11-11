@@ -4,30 +4,7 @@
 .auth__form{
     display: flex;
     flex-direction: column;
-    
+
     width: 100%;
-    max-width: 400px;
-
-    
-}
-.form__input{
-    width: 100%;
-    height: 50px;
-    background-color: $white;
-
-    padding:0 15px;
-
-    border:none;
-    border-radius: 15px;
-
-    font-size: 2rem;
-
-    box-shadow: $mediumShadow;
-    box-sizing: border-box;
-    &:focus{
-        box-shadow: $smallShadow;
-    }
-    &:not(:last-child){
-        margin-bottom:15px;
-    }
+    max-width: 400px; 
 }

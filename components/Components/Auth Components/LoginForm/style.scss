@@ -6,12 +6,17 @@
     width:100%;
 
     display:flex;
+    flex-direction: column;
     justify-content: space-between; 
+
+    @include media('sm'){
+        flex-direction: row;
+    }
 }
 .login__form__left{
-    display:none;
-
-    height:500px;
+    display:flex;
+    width:100%;
+    padding:50px 10px;
 
     justify-content: center;
     align-items: center;
@@ -26,21 +31,30 @@
     font-size:3rem;
 
     box-shadow:$mediumShadow;
+    box-sizing: border-box;
     @include media('sm'){
-        display:flex;
-        width:50%;
+        width:40%;
+    }
+    & h1{
+        max-width: 100%;
     }
 }
 .login__form__right{
     width:100%;
-    
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    padding: 0 20px;
+    padding: 20px;
+
+    box-sizing: border-box;
     @include media('sm'){
-        width:50%;
+        width:60%;
+    }
+    & .login__title{
+        font-size: 3rem;
+        margin-bottom:30px;
     }
 }

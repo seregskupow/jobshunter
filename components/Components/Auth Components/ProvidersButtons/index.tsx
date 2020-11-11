@@ -33,6 +33,7 @@ export default function ProviderButtons() {
   };
   return (
     <div className="provider__buttons__container">
+      <div className="divider"></div>
       <GoogleLogin
         clientId={process.env.GOOGLE_ID}
         buttonText="Login"

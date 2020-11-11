@@ -8,7 +8,7 @@ export default function Logo({color = "white"}:linkType) {
     return (
         <Link href="/">
             <a className={`logo logo_${color}`}>
-                <span>H</span>irer
+                <span>H</span>iгer
             </a>
         </Link>
     )

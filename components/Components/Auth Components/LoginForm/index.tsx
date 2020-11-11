@@ -3,34 +3,32 @@ import '../inputs.scss';
 import { useDispatch } from "react-redux";
 import { signIn } from "../../../../redux/actions/authAction";
 import { useRouter } from "next/router";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form} from "formik";
+import { TFunction } from 'next-i18next';
 import * as Yup from 'yup';
 import ProviderButtons from "../ProvidersButtons";
-export default function LoginForm() {
+import FormikTextField from "../../FormsComponents/FormikTextField";
+import FormikSubmitButton from "../../FormsComponents/FormikSubmitButton";
+import LanguageSwitcher from "../../LanguageSwitcher";
+import Logo from "../../Logo";
+import FormikLabel from "../../FormsComponents/FormikLabel";
+import MyLink from "../../MyLink";
+export default function LoginForm({t}: { readonly t: TFunction }) {
   const dispatch = useDispatch();
   const router = useRouter();
   return (
     <div className="login__form">
       <div className="login__form__left">
         <div>
-          <h1>HIRER</h1>
-          <h2>Найди работу мечты</h2>
+          <Logo />
+          <h2>{t("auth:leftSlogan")}</h2>
         </div>
       </div>
       <div className="login__form__right">
+        <h1 className="login__title">{t("auth:loginTitle")}</h1>
         <Formik
           initialValues={{ email: "", password: "" }}
-          validate={(values) => {
-            const errors = {email:""};
-            if (!values.email) {
-              errors.email = "Required";
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = "Invalid email address";
-            }
-            return errors;
-          }}
+          validate={() => ({})}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
@@ -39,18 +37,21 @@ export default function LoginForm() {
           }}
         >
           {({ isSubmitting }) => (
-            <Form className="auth__form"> 
-              <Field className = "form__input" type="email" name="email" />
-              <ErrorMessage name="email" component="div" />
-              <Field className = "form__input" type="password" name="password" />
-              <ErrorMessage name="password" component="div" />
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
+            <Form autoComplete={"off"}  className="auth__form">
+              <FormikLabel text={t("auth:emailLabel")} fontSize={2}/> 
+              <FormikTextField type={"text"} name = {"email"} />
+              <FormikLabel text={t("auth:passwordLabel")} fontSize={2}/> 
+              <FormikTextField type={"password"} name = {"password"} />
+              <FormikSubmitButton text={t("auth:loginButton")} isSubmitting={isSubmitting} />
             </Form>
           )}
         </Formik>
         <ProviderButtons />
+        <div>
+          <FormikLabel text={t("auth:noAccount")} fontSize={2}/>
+          <MyLink href={"/auth/register"} color={"blue"} text={t("auth:registerLink")}/>
+          </div>
+        <LanguageSwitcher />
       </div>
     </div>
   );

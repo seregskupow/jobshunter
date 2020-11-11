@@ -2,7 +2,6 @@ import { i18n } from '../../../i18n';
 import { I18nContext } from 'next-i18next';
 import { useContext } from 'react'
 import './style.scss';
-import WhitePanel from '../../Layout elements/WhitePanel';
 
 function LanguageSwitcher(){
     const { i18n: { language } } = useContext(I18nContext);
@@ -13,9 +12,9 @@ function LanguageSwitcher(){
     return(
         <div className="language-switcher">
             <fieldset>
-				<input type="radio" name="duration-1" value="monthly" id="monthly-1" onClick={() => i18n.changeLanguage('ua')} />
+				<input type="radio" name="duration-1" checked={language === 'ua' && true} value="monthly" id="monthly-1" onClick={() => i18n.changeLanguage('ua')} />
 				<label htmlFor="monthly-1" className={`${language === 'ua' ? 'lang-toggled': ''}`}>УКР</label>
-				<input type="radio" name="duration-1" value="yearly" id="yearly-1" onClick={() => i18n.changeLanguage('ru')} />
+				<input type="radio" checked={language === 'ru' && true} name="duration-1" value="yearly" id="yearly-1" onClick={() => i18n.changeLanguage('ru')} />
 				<label htmlFor="yearly-1" className={`${language === 'ru' ? 'lang-toggled': ''}`}>РУС</label>
 				<span className="switch"></span>
 			</fieldset>
