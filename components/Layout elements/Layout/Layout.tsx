@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
+import {AnimatePresence } from "framer-motion";
 const Layout = (props) => {
   return (
     <>
@@ -45,9 +46,16 @@ const Layout = (props) => {
         ></script>
       </Head>
       <Navbar />
-        {props.children}
+      <AnimatePresence exitBeforeEnter>      
+          {props.children}
+      </AnimatePresence>
       <Footer />
     </>
   );
 };
 export default Layout;
+export const variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit:{ opacity: 0 }
+}

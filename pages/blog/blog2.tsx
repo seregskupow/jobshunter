@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Layout,{variants} from '../../components/Layout elements/Layout/Layout';
 import {withTranslation } from '../../i18n';
-function Blog() {
+function BlogSec() {
     return (
         <motion.div
         variants = {variants}
@@ -12,10 +12,10 @@ function Blog() {
         transition={{duration:5}}
       >
         <div>
-        <h1>bloggg</h1>
+            <h1>blog2</h1>
         </div>
         </motion.div>
     )
 }
 
-export default Blog;
+export default BlogSec;

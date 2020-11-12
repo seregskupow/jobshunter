@@ -1,7 +1,9 @@
-import './style.scss';
+import "./style.scss";
 import Head from "next/head";
-export default function AuthLayout(props){
-    return (<>
+import {AnimatePresence } from "framer-motion";
+export default function AuthLayout(props) {
+  return (
+    <>
       <Head>
         <title>JobsHunter</title>
         <meta charSet="utf-8" />
@@ -42,12 +44,18 @@ export default function AuthLayout(props){
           crossOrigin="anonymous"
         ></script>
       </Head>
-    <div className="auth__container">
+      <div className="auth__container">
         <div className="auth__container__inner">
-        {props.children}   
+          <AnimatePresence exitBeforeEnter>
+              {props.children}
+          </AnimatePresence>
         </div>
-             
-    </div>
-        
-    </>)
+      </div>
+    </>
+  );
+}
+export const variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit:{ opacity: 0 }
 }

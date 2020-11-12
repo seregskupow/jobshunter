@@ -103,8 +103,8 @@ function Navbar({ t }) {
           <div className="header__inner header__inner__top__inner">
           <LanguageSwitcher/>
           <ul className="hot-links">
-            <li className="hot-links__item"><Link href="/"><a className="hot-links__item__link">🔥{t("navBar:hotLink")}</a></Link></li>
-            <li className="hot-links__item"><Link href="/"><a className="hot-links__item__link">{t("navBar:placeResume")}</a></Link></li>
+            <li className="hot-links__item"><Link href="/blog/blog2"><a className="hot-links__item__link">🔥{t("navBar:hotLink")}</a></Link></li>
+            <li className="hot-links__item"><Link href="/blog/bloggg"><a className="hot-links__item__link">{t("navBar:placeResume")}</a></Link></li>
           <li className="hot-links__item"><AccountBtn/></li>
           </ul>
           </div>

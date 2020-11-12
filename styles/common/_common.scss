@@ -1,5 +1,6 @@
 html{
     font-size:10px;
+    box-sizing: border-box;
     &:focus {
         outline: none;
       }
@@ -19,6 +20,10 @@ ul{
 a{
     text-decoration: none;
     color:$blue;
+}
+button{
+    border:none;
+    background:none;
 }
 textarea:focus, input:focus, button:focus{
     outline: none;

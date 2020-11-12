@@ -1,18 +1,24 @@
 import {withTranslation} from '../../i18n';
 import { TFunction } from 'next-i18next';
+import { motion} from "framer-motion";
 import CenteredContainer from "../../components/Layout elements/CenteredContainer";
 import WhitePanel from "../../components/Layout elements/WhitePanel";
-import AuthLayout from "../../components/Layout elements/AuthLayout";
+import AuthLayout,{variants} from "../../components/Layout elements/AuthLayout";
 import LoginForm from "../../components/Components/Auth Components/LoginForm";
 const Login = ({t}: { readonly t: TFunction }) => {
   return (
-    <>
+    <motion.div
+    variants = {variants}
+    initial="initial"
+    animate="animate"
+    exit="exit"
+  >
       <CenteredContainer align={"center"} height={100}>    
         <WhitePanel width={100} padding={0}>
             <LoginForm t={t}/>
         </WhitePanel>
       </CenteredContainer>
-    </>
+    </motion.div>
   );
 };
 Login.Layout = AuthLayout;

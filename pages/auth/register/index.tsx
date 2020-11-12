@@ -1,17 +1,21 @@
 import {withTranslation} from '../../../i18n';
 import { TFunction } from 'next-i18next';
+import { motion} from "framer-motion";
 import CenteredContainer from "../../../components/Layout elements/CenteredContainer";
-import WhitePanel from "../../../components/Layout elements/WhitePanel";
-import AuthLayout from "../../../components/Layout elements/AuthLayout";
-function Register(){
+import AuthLayout,{variants} from "../../../components/Layout elements/AuthLayout";
+import RegisterForm from '../../../components/Components/Auth Components/RegisterForm';
+function Register({t}: { readonly t: TFunction }){
     return (
-        <>
+      <motion.div
+      variants = {variants}
+    initial="initial"
+    animate="animate"
+    exit="exit"
+    >
       <CenteredContainer align={"center"} height={100}>    
-        <WhitePanel width={100} padding={0}>
-           а
-        </WhitePanel>
+            <RegisterForm t={t}/>
       </CenteredContainer>
-    </>
+    </motion.div>
     )
 }
 Register.Layout = AuthLayout;
