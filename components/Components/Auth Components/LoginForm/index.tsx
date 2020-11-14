@@ -38,9 +38,9 @@ export default function LoginForm({t}: { readonly t: TFunction }) {
         >
           {({ isSubmitting }) => (
             <Form autoComplete={"off"}  className="auth__form">
-              <FormikLabel text={t("auth:emailLabel")} fontSize={2}/> 
+              <FormikLabel text={t("auth:enterEmail")} fontSize={2}/> 
               <FormikTextField type={"text"} name = {"email"} />
-              <FormikLabel text={t("auth:passwordLabel")} fontSize={2}/> 
+              <FormikLabel text={t("auth:enterPassword")} fontSize={2}/> 
               <FormikTextField type={"password"} name = {"password"} />
               <FormikSubmitButton text={t("auth:loginButton")} isSubmitting={isSubmitting} />
             </Form>

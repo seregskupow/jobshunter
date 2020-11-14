@@ -4,11 +4,72 @@
 .formik__text__field{
     width: 100%;
 }
+.form__field__wrapper{
+        position:relative;
+        border-radius: 15px;
+        box-shadow: $smallShadow;
+        overflow:hidden;
+
+      &::before{
+        content:'';
+        position:absolute;
+        bottom:0;
+        left:0;
+
+        width:100%;
+        height:2px;
+
+        border-radius: 50px;
+
+        background:$darkGrey;
+
+        transform-origin:center;
+
+        transition: .3s;
+
+    }
+    &::after{
+        content:'';
+        position:absolute;
+        bottom:0;
+        left:0;
+
+        width:100%;
+        height:2px;
+
+        border-radius: 15px;
+
+        background:$blue;
+
+        transform-origin:center;
+        transform:scaleX(0);
+
+        transition: all .4s ease;
+
+        z-index:1;
+    }
+    &:focus-within {
+        &::after{
+            transform:scaleX(1);
+        }
+        & .form__field{
+            
+        }
+    }
+}
+.field__error{
+    & .form__field{
+        background: $lightRed;
+    }
+    &::after, &::before{
+        background:$red;
+    }
+}
 .form__field{
     width: 100%;
     height: 50px;
     background-color: $darkWhite;
-
+    box-shadow: $innerMediumShadow;
     padding:0 15px;
 
     border:none;
@@ -16,12 +77,14 @@
 
     font-size: 2rem;
 
-    box-shadow: $mediumShadow;
     box-sizing: border-box;
-    &:focus{
-        box-shadow: $smallShadow;
-    }
+    transition: background .3s ease;
+    
     &:not(:last-child){
         margin-bottom:15px;
     }
+}
+.form__input__error{
+    color:$red;
+    font-size: 1.5rem;
 }

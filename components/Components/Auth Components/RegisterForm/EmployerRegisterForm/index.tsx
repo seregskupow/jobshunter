@@ -30,24 +30,31 @@ export default function EmployerRegisterForm({ t }: { readonly t: TFunction }) {
           >
             {({ isSubmitting }) => (
               <Form autoComplete={"off"} className="auth__form">
-                <FormikLabel text={t("auth:emailLabel")} fontSize={2} />
+                <FormikLabel text={t("auth:enterFIO")} fontSize={2} />
                 <FormikTextField type={"text"} name={"email"} />
-                <FormikLabel text={t("auth:emailLabel")} fontSize={2} />
-                <FormikTextField type={"tel"} name={"email"} />
-                <FormikLabel text={t("auth:passwordLabel")} fontSize={2} />
+                
+                <FormikLabel text={t("auth:enterCompanyName")} fontSize={2} />
                 <FormikTextField type={"text"} name={"email"} />
-                <FormikLabel text={t("auth:passwordLabel")} fontSize={2} />
+
+                <FormikLabel text={t("auth:enterCompanyWebsite")} fontSize={2} />
+                <FormikTextField type={"text"} name={"email"} />
+                
+                <FormikLabel text={t("auth:enterEmail")} fontSize={2} />
+                <FormikTextField type={"email"} name={"email"} />
+                
+                <FormikLabel text={t("auth:enterPassword")} fontSize={2} />
                 <FormikTextField type={"password"} name={"password"} />
-                <FormikLabel text={t("auth:passwordLabel")} fontSize={2} />
+                
+                <FormikLabel text={t("auth:repeatPassword")} fontSize={2} />
                 <FormikTextField type={"password"} name={"password"} />
+                
                 <FormikSubmitButton
-                  text={t("auth:loginButton")}
+                  text={t("auth:registerLink")}
                   isSubmitting={isSubmitting}
                 />
               </Form>
             )}
           </Formik>
-          <ProviderButtons />
           <LanguageSwitcher />
         </CenteredContainer>
       </motion.div>

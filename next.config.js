@@ -5,7 +5,7 @@ const withPWA = require('next-pwa')
 const withSvgr = require("next-svgr");
 const { nextI18NextRewrites } = require('next-i18next/rewrites')
 
-const localSubPaths = {
+const localeSubpaths = {
   ru:'ru'
 }
 module.exports = withPlugins(
@@ -21,7 +21,7 @@ module.exports = withPlugins(
   ],
   {
     
-    rewrites:async () => nextI18NextRewrites(localSubPaths),
+    rewrites:async () => nextI18NextRewrites(localeSubpaths),
     env:{
       GOOGLE_ID:process.env.GOOGLE_ID,
       FACEBOOK_ID:process.env.FACEBOOK_ID

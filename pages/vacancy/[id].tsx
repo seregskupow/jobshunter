@@ -1,8 +1,8 @@
-
-export default function Vacancy({id}) {
+import {withTranslation } from '../../i18n'
+export default function Vacancy(props) {
     return (
         <div>
-            vacancy № {id}
+            vacancy № {props.id}
         </div>
     )
 }
@@ -11,7 +11,8 @@ export async function getStaticPaths() {
       paths: [
         { params: { id:"544"} }
       ],
-      fallback: true    };
+      fallback: true    
+    };
   }
 export async function getStaticProps({params}) {
     const id = params.id;
@@ -19,3 +20,4 @@ export async function getStaticProps({params}) {
       props: {id},
     }
   }
+ 
