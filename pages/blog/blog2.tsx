@@ -17,5 +17,5 @@ function BlogSec() {
         </motion.div>
     )
 }
-
+BlogSec.Layout = Layout;
 export default BlogSec;

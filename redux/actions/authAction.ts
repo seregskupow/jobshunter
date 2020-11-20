@@ -1,10 +1,12 @@
 import axios from 'axios';
 import * as t from '../types';
 import Router from 'next/router'
-
+import { MyGet } from '../../pages/api/myGet';
+ const server:string = 'http://a560c1c2fdb5.ngrok.io/api/users';
+//const server:string = 'http://localhost:1337/api/auth';
 export const oauthGoogle = data => {
     return async dispatch => {
-      const json = await axios.post('http://localhost:5000/users/oauth/google', {
+      const json = await axios.post(server + '/google', {
         access_token: data
       });
   
@@ -17,7 +19,7 @@ export const oauthGoogle = data => {
   
 export const oauthFacebook = data => {
     return async dispatch => {
-        const json= await axios.post('http://localhost:5000/users/oauth/facebook', {
+        const json= await axios.post(server + '/facebook', {
         access_token: data
       });
   
@@ -30,12 +32,16 @@ export const oauthFacebook = data => {
   export const signUp = data => {
     return async dispatch => {
       try {
-        const json = await axios.post('http://localhost:5000/users/signup', data);
-  
+        dispatch({
+          type:t.AUTH_LOADING,
+          payload:true
+        })
+        const json = await axios.post(server + '/register', data);
         dispatch({
           type: t.AUTH_SIGN_UP,
           payload:json
         });
+        Router.push('/');
         
       } catch(err) {
         dispatch({
@@ -49,9 +55,30 @@ export const oauthFacebook = data => {
   export const signIn = (data) => {
     return async dispatch => {
       try {
-        // const json = await axios.post('http://localhost:5000/users/signin', data);
-        console.log('im triggered')
-        console.log(data)
+        dispatch({
+          type:t.AUTH_LOADING,
+          payload:true
+        })
+        
+      //server = http://localhost:8080/api/users
+      const resp = await axios.post(server + '/login', data,{ withCredentials: true });
+      console.log({resp})
+
+
+
+      //  const resp = await fetch(server + '/login', {
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //     mode:'cors',
+      //     credentials:'include',
+      //     method: 'POST',
+      //     body: JSON.stringify({
+      //       email:'sejiso8040@septicvernon.com',
+      //       password:'saddsadsadsaddds'
+      //     })
+      //   })
+      //   console.log(await resp.json())
         dispatch({
           type: t.AUTH_SIGN_IN,
           payload:data
@@ -60,16 +87,33 @@ export const oauthFacebook = data => {
       } catch(err) {
         dispatch({
           type: t.AUTH_ERROR,
-          payload: 'Email and password combination isn\'t valid'
+          payload: err.toString()
         })
       }
     };
   }
-  
+  export const loginUser = data => {
+    return dispatch =>{
+      try{
+        dispatch({
+          type: t.AUTH_SIGN_IN,
+          payload:{
+            ...data,
+            lastSearchKey:"govno"
+          }
+        });
+      }catch(err){
+        dispatch({
+          type: t.AUTH_ERROR,
+          payload: 'error'
+        })
+      }
+    }
+  }
   export const checkAuth = () => {
     return async dispatch => {
       try {
-        await axios.get('http://localhost:5000/users/status');
+        await axios.get(server + '/status');
   
         dispatch({
           type: t.AUTH_SIGN_IN

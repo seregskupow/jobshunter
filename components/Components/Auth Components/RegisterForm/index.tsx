@@ -28,8 +28,7 @@ export default function RegisterForm({ t }: { readonly t: TFunction }) {
             <li className={`tab ${activeTab==="employee" &&"tab_active"}`}>
               <button onClick={() => setTab("employee")}>Employee</button>
             </li> */}
-            <fieldset>
-             
+            <fieldset>            
                 <input
                   type="radio"
                   checked={activeTab === "employer" && true}
@@ -41,8 +40,7 @@ export default function RegisterForm({ t }: { readonly t: TFunction }) {
                   className={`${activeTab === "employer" ? "tab-toggled" : ""}`}
                 >
                   Працедавець
-                </label>
-             
+                </label>            
             
                 <input
                   type="radio"

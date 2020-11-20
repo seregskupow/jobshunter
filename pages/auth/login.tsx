@@ -7,7 +7,9 @@ import AuthLayout,{variants} from "../../components/Layout elements/AuthLayout";
 import LoginForm from "../../components/Components/Auth Components/LoginForm";
 const Login = ({t}: { readonly t: TFunction }) => {
   return (
+    
     <motion.div
+    key="login"
     variants = {variants}
     initial="initial"
     animate="animate"

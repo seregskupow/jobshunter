@@ -1,10 +1,11 @@
 import "../styles/main.scss";
+import axios from 'axios';
 import { Provider} from "react-redux";
 import React from "react";
 import { useStore } from '../redux/store';
 import { appWithTranslation } from '../i18n'
 import {initializeStore} from '../redux/store';
-
+import {loginUser} from '../redux/actions/authAction';
 function MyApp({ Component, pageProps}) {
   const store = useStore(pageProps.initialReduxState)
   const Layout = Component.Layout ? Component.Layout : React.Fragment;
@@ -22,11 +23,17 @@ MyApp.getInitialProps  = async ({Component,ctx})=>{
     pageProps = await Component.getInitialProps(ctx)
   }
   const reduxStore = initializeStore();
-  const { dispatch } = reduxStore
-   await dispatch({
-    type:"AUTH_SIGN_IN",
-    payload:{userName:"serega Kovalev", isAuthenticated: false,userAvatar:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQANrTXnjdRhO_W-elE9zX1R2bTzC6rVMeQBw&usqp=CAU'}
-  })
+  const { dispatch } = reduxStore;
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/photos?_limit=1`
+  );
+  const {email} = await res.json()
+  dispatch(loginUser({userName:email,userAvatar:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQANrTXnjdRhO_W-elE9zX1R2bTzC6rVMeQBw&usqp=CAU'}))
+  //  await dispatch({
+  //     type:"AUTH_SIGN_IN",
+  //     payload:{userName:"serega Kovalev", isAuthenticated: !!res,userAvatar:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQANrTXnjdRhO_W-elE9zX1R2bTzC6rVMeQBw&usqp=CAU'}
+  //   })
+
   return{
     pageProps: { initialReduxState: reduxStore.getState()}
   }

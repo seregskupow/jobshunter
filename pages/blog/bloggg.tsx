@@ -17,5 +17,5 @@ function Blog() {
         </motion.div>
     )
 }
-
+Blog.Layout = Layout;
 export default Blog;

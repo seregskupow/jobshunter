@@ -57,5 +57,5 @@ export default Layout;
 export const variants = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
-  exit:{ opacity: 0 }
+  exit:{ opacity: 0, x:200 }
 }

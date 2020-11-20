@@ -9,8 +9,12 @@ import LanguageSwitcher from "../../../LanguageSwitcher";
 import FormikLabel from "../../../FormsComponents/FormikLabel";
 import MyLink from "../../../MyLink";
 import { TFunction } from "next-i18next";
+import {useDispatch, useSelector} from 'react-redux';
+import {signUp} from '../../../../../redux/actions/authAction';
 
 export default function EmployerRegisterForm({ t }: { readonly t: TFunction }) {
+  const isLoading = useSelector(state=>state.user.isLoading);
+  const dispatch = useDispatch()
   return (
       <motion.div
         initial={{ x:"-100%" }}
@@ -22,10 +26,7 @@ export default function EmployerRegisterForm({ t }: { readonly t: TFunction }) {
             initialValues={{ email: "", password: "" }}
             validate={() => ({})}
             onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 3000);
+            
             }}
           >
             {({ isSubmitting }) => (

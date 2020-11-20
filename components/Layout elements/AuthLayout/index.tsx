@@ -1,7 +1,11 @@
 import "./style.scss";
+import {useEffect} from 'react';
 import Head from "next/head";
 import {AnimatePresence } from "framer-motion";
 export default function AuthLayout(props) {
+  useEffect(() => {
+   console.log("allah"  + Date.now())
+  }, []);
   return (
     <>
       <Head>
@@ -46,16 +50,16 @@ export default function AuthLayout(props) {
       </Head>
       <div className="auth__container">
         <div className="auth__container__inner">
-          <AnimatePresence exitBeforeEnter>
+        <AnimatePresence exitBeforeEnter>
               {props.children}
-          </AnimatePresence>
+        </AnimatePresence>
         </div>
       </div>
     </>
   );
 }
 export const variants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit:{ opacity: 0 }
+  initial: { opacity: 0,y:-100 },
+  animate: { opacity: 1,y:0 },
+  exit:{ opacity: 0,y:-200 }
 }
