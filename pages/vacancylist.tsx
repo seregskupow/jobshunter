@@ -1,21 +1,26 @@
-import { GetServerSideProps, NextPageContext } from "next";
-import { InferGetServerSidePropsType } from "next";
-import Layout from "../components/Layout elements/Layout/Layout";
-import { signIn, signOut, useSession } from "next-auth/client";
-import { Router, withTranslation } from "../i18n";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import {
+  GetServerSideProps,
+  NextPageContext,
+  InferGetServerSidePropsType,
+} from "next";
+
+import { GetServerSidePropsContext } from "next-redux-wrapper";
+import Layout from "../components/Layout elements/Layout/Layout";
+import { Router, withTranslation } from "../i18n";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import MainContainer from "../components/Layout elements/MainContainer";
 import GridContainer from "../components/Layout elements/GridContainer/GridContainer";
 import GridColumn from "../components/Layout elements/GridContainer/GridColumn";
 import WhitePanel from "../components/Layout elements/WhitePanel";
-import { GetServerSidePropsContext } from "next-redux-wrapper";
 import { MyGet } from "./api/myGet";
+
 function vacancylist({
   posts,
   searchKeyword,
   t,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: // eslint-disable-next-line no-use-before-define
+InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <MainContainer>
       <h1>{t("vacancyListPage:title")}</h1>
@@ -24,7 +29,7 @@ function vacancylist({
           <WhitePanel>
             {posts &&
               posts.slice(0, 20).map((post) => (
-                <div className="col-12 mb-3">
+                <div key={Math.random()} className="col-12 mb-3">
                   <div
                     className="card"
                     style={{ width: "100%" }}
@@ -63,18 +68,24 @@ function vacancylist({
     </MainContainer>
   );
 }
-export const getServerSideProps: GetServerSideProps = async (ctx:GetServerSidePropsContext) => {
-  const {query} = ctx;
-  //search Jeyword from url or search
-  const searchKeyword: string = query.search === undefined ? "" : query.search.toString();
-  //limit for posts
-  const limit: number = query.limit === undefined ? 5 : parseInt(query.limit.toString());
-  //test cookies req
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const { query } = ctx;
+  // search Jeyword from url or search
+  const searchKeyword: string =
+    query.search === undefined ? "" : query.search.toString();
+  // limit for posts
+  const limit: number =
+    query.limit === undefined ? 5 : parseInt(query.limit.toString(), 10);
+  // test cookies req
   // const test = await MyGet('http://localhost:5000/check',ctx);
   // console.log(test);
-  const test2 = await MyGet('http://a560c1c2fdb5.ngrok.io/api/profiles/all',ctx);
-  console.log(test2);
-  //get posts
+  // const test2 = await MyGet(
+  //   "http://a560c1c2fdb5.ngrok.io/api/profiles/all",
+  //   ctx
+  // );
+  // get posts
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/photos?_limit=${limit}`
   );

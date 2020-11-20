@@ -1,21 +1,19 @@
-import { useEffect } from "react";
-import {withTranslation } from '../i18n'
-import dynamic from "next/dynamic";
-import Router from "next/router";
+import { withTranslation } from "../i18n";
 import Layout from "../components/Layout elements/Layout/Layout";
 import MainContainer from "../components/Layout elements/MainContainer";
 import GridContainer from "../components/Layout elements/GridContainer/GridContainer";
 import GridColumn from "../components/Layout elements/GridContainer/GridColumn";
 import WhitePanel from "../components/Layout elements/WhitePanel";
-function Home({t}) {
+
+function Home({ t }) {
   return (
     <MainContainer>
-      <h1>{t('common:title')}</h1> 
-      <h2>{t('indexPage:header')}</h2>
+      <h1>{t("common:title")}</h1>
+      <h2>{t("indexPage:header")}</h2>
       <GridContainer>
         <GridColumn>
           <WhitePanel width={100}>
-            <p style={{fontSize:"2rem"}}>
+            <p style={{ fontSize: "2rem" }}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
               sed sit autem, impedit inventore necessitatibus illo, ut rem
               laborum exercitationem suscipit quas vitae doloribus enim?
@@ -28,7 +26,7 @@ function Home({t}) {
         </GridColumn>
         <GridColumn>
           <WhitePanel width={100}>
-            <p style={{fontSize:"2rem"}}>
+            <p style={{ fontSize: "2rem" }}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Reprehenderit optio quam doloremque eos, molestias iste culpa
               assumenda praesentium labore nulla iusto quas perspiciatis qui
@@ -45,8 +43,8 @@ function Home({t}) {
 }
 Home.getInitialProps = async () => {
   return {
-      namespacesRequired: ['common','indexPage']
-  }
-}
+    namespacesRequired: ["common", "indexPage"],
+  };
+};
 Home.Layout = Layout;
 export default withTranslation()(Home);

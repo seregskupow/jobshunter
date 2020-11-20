@@ -1,15 +1,19 @@
-import './style.scss'
-import {Link} from '../../../i18n';
-type linkType ={
-    color?:"black" | "white",
-}
+import "./style.scss";
+import { FunctionComponent } from "react";
+import { Link } from "../../../i18n";
 
-export default function Logo({color = "white"}:linkType) {
-    return (
-        <Link href="/">
-            <a className={`logo logo_${color}`}>
-                <span>H</span>iгer
-            </a>
-        </Link>
-    )
-}
+type linkType = {
+  // eslint-disable-next-line react/require-default-props
+  color?: "black" | "white";
+};
+
+const Logo: FunctionComponent<any> = ({ color = "white" }: linkType) => {
+  return (
+    <Link href="/">
+      <a className={`logo logo_${color}`}>
+        <span>H</span>iгer
+      </a>
+    </Link>
+  );
+};
+export default Logo;

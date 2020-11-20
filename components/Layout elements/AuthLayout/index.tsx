@@ -1,11 +1,9 @@
 import "./style.scss";
-import {useEffect} from 'react';
+import { FunctionComponent } from "react";
 import Head from "next/head";
-import {AnimatePresence } from "framer-motion";
-export default function AuthLayout(props) {
-  useEffect(() => {
-   console.log("allah"  + Date.now())
-  }, []);
+import { AnimatePresence } from "framer-motion";
+
+const AuthLayout: FunctionComponent<any> = (props) => {
   return (
     <>
       <Head>
@@ -46,20 +44,24 @@ export default function AuthLayout(props) {
           async
           src="https://cdn.jsdelivr.net/npm/pwacompat"
           crossOrigin="anonymous"
-        ></script>
+        />
       </Head>
       <div className="auth__container">
         <div className="auth__container__inner">
-        <AnimatePresence exitBeforeEnter>
-              {props.children}
-        </AnimatePresence>
+          <AnimatePresence exitBeforeEnter>
+            {
+              // eslint-disable-next-line react/destructuring-assignment
+              props.children
+            }
+          </AnimatePresence>
         </div>
       </div>
     </>
   );
-}
+};
+export default AuthLayout;
 export const variants = {
-  initial: { opacity: 0,y:-100 },
-  animate: { opacity: 1,y:0 },
-  exit:{ opacity: 0,y:-200 }
-}
+  initial: { opacity: 0, y: -100 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -200 },
+};

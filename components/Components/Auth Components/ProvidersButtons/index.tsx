@@ -2,14 +2,18 @@ import "./style.scss";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { useDispatch } from "react-redux";
-import { signIn } from "../../../../redux/actions/authAction";
 import { useRouter } from "next/router";
+import { FunctionComponent } from "react";
+import { Props } from "framer-motion/types/types";
+import { signIn } from "../../../../redux/actions/authAction";
 import GoogleImg from "./google.svg";
 import FacebookImg from "./facebook.svg";
-export default function ProviderButtons() {
+
+const ProviderButtons: FunctionComponent<Props> = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const responseGoogle = async (response) => {
+    console.log(response);
     await dispatch(
       signIn({
         isAuthenticated: true,
@@ -33,11 +37,12 @@ export default function ProviderButtons() {
   };
   return (
     <div className="provider__buttons__container">
-      <div className="divider"></div>
+      <div className="divider" />
       <GoogleLogin
         clientId={process.env.GOOGLE_ID}
         buttonText="Login"
         render={(renderProps) => (
+          // eslint-disable-next-line no-use-before-define
           <GoogleBtn
             onClick={renderProps.onClick}
             disabled={renderProps.disabled}
@@ -45,12 +50,13 @@ export default function ProviderButtons() {
         )}
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
+        cookiePolicy="single_host_origin"
       />
       <FacebookLogin
         appId={process.env.FACEBOOK_ID}
         fields="name,email,picture"
         render={(renderProps) => (
+          // eslint-disable-next-line no-use-before-define
           <FacebookBtn
             onClick={renderProps.onClick}
             disabled={renderProps.isDisabled}
@@ -60,36 +66,48 @@ export default function ProviderButtons() {
       />
     </div>
   );
-}
-export function GoogleBtn({
+};
+export default ProviderButtons;
+
+const GoogleBtn: FunctionComponent<Props> = ({
   onClick,
   disabled,
 }: {
   onClick: () => void;
   disabled: boolean;
-}) {
+}) => {
   return (
-    <button className="provider__btn" onClick={onClick} disabled={disabled}>
+    <button
+      type="button"
+      className="provider__btn"
+      onClick={onClick}
+      disabled={disabled}
+    >
       <div className="provider__logo">
         <GoogleImg />
       </div>
       <span>Google</span>
     </button>
   );
-}
-export function FacebookBtn({
+};
+const FacebookBtn: FunctionComponent<Props> = ({
   onClick,
   disabled,
 }: {
   onClick: () => void;
   disabled: boolean;
-}) {
+}) => {
   return (
-    <button className="provider__btn" onClick={onClick} disabled={disabled}>
+    <button
+      type="button"
+      className="provider__btn"
+      onClick={onClick}
+      disabled={disabled}
+    >
       <div className="provider__logo">
         <FacebookImg />
       </div>
       <span>Facebook</span>
     </button>
   );
-}
+};

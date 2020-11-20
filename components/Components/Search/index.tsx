@@ -8,7 +8,6 @@ import { withTranslation } from "../../../i18n";
 function Search({ t }) {
   const router = useRouter();
   const defaultSearchParam = useSelector((state) => state.user.lastSearchKey);
-  console.log({ defaultSearchParam });
   const searchParam =
     router.query.search === undefined
       ? defaultSearchParam
@@ -18,8 +17,10 @@ function Search({ t }) {
     setSearch(value);
   };
   useEffect(() => {
-    defaultSearchParam !== undefined && setSearch(defaultSearchParam)
-  }, [defaultSearchParam,setSearch]);
+    if (defaultSearchParam !== undefined) {
+      setSearch(defaultSearchParam);
+    }
+  }, [defaultSearchParam, setSearch]);
   const onSearchSubmit = (e) => {
     if (e.key === "Enter") {
       Router.push({
@@ -48,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const searchKeyword: string =
     query.search === undefined ? "" : query.search.toString();
   const limit: number =
-    query.limit === undefined ? 5 : parseInt(query.limit.toString());
+    query.limit === undefined ? 5 : parseInt(query.limit.toString(), 10);
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/photos?_limit=${limit}`
   );
