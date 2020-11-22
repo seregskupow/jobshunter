@@ -29,10 +29,10 @@ export default function LoginForm({ t }: { readonly t: TFunction }) {
       .string()
       .min(8, t("auth:invalidPassword"))
       .max(20, t("auth:invalidPassword"))
-      .matches(
-        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-        t("auth:invalidPassword")
-      )
+      // .matches(
+      //   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+      //   t("auth:invalidPassword")
+      // )
       .required(t("auth:invalidPassword")),
   });
   return (

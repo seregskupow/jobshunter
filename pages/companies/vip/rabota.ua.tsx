@@ -1,9 +1,3 @@
-
-
 export default function rabotaUA() {
-    return (
-        <div>
-            Rabota.ua
-        </div>
-    )
+  return <div>Rabota.ua</div>;
 }

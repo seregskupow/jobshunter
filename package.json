@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ./components/** ./pages/** -c .eslintrc.json --ext js,jsx,ts,tsx",
-    "lint-fix": "eslint ./components/** ./pages/** -c .eslintrc.json --fix --ext js,jsx,ts,tsx"
+    "lint": "eslint ./components/** ./pages/** -c .eslintrc.js --ext js,jsx,ts,tsx",
+    "lint-fix": "eslint ./components/** ./pages/** -c .eslintrc.js --fix --ext js,jsx,ts,tsx"
   },
   "dependencies": {
     "@types/next-auth": "^3.1.7",

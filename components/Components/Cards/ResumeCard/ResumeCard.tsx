@@ -1,10 +1,6 @@
-import './style.scss';
-import React from 'react'
+import "./style.scss";
+import React from "react";
 
 export default function ResumeCard() {
-    return (
-        <div>
-            Resume card
-        </div>
-    )
+  return <div>Resume card</div>;
 }

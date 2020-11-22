@@ -1,11 +1,7 @@
 import "./style.scss";
 
-import React from 'react'
+import React from "react";
 
 export default function VacancyCard() {
-    return (
-        <div>
-            vacancycard
-        </div>
-    )
+  return <div>vacancycard</div>;
 }

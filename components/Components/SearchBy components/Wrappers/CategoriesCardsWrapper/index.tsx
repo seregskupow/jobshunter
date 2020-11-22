@@ -1,10 +1,6 @@
-import './style.scss';
-import React from 'react'
+import "./style.scss";
+import React from "react";
 
 export default function CategoriesCardsWrapper() {
-    return (
-        <div>
-            CategoriesWrapper
-        </div>
-    )
+  return <div>CategoriesWrapper</div>;
 }

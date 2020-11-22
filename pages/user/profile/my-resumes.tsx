@@ -1,9 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function muResumes() {
-    return (
-        <div>
-            my resumes
-        </div>
-    )
+  return <div>my resumes</div>;
 }

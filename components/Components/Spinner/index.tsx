@@ -1,9 +1,10 @@
 import "./style.scss";
+
 type Spinner = {
-    color:"white" | "black",
-    height:number
-}
-export default function Spinner({color,height}:Spinner) {
+  color: "white" | "black";
+  height: number;
+};
+export default function Spinner({ color, height }: Spinner) {
   return (
     <div
       className="loader loader--style3"
@@ -21,6 +22,6 @@ export default function Spinner({color,height}:Spinner) {
            </path>
      </svg>`,
       }}
-    ></div>
+    />
   );
 }

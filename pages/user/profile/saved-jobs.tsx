@@ -1,9 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function savedJobs() {
-    return (
-        <div>
-            saved jobs
-        </div>
-    )
+  return <div>saved jobs</div>;
 }

@@ -1,9 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function recommendations() {
-    return (
-        <div>
-            recommendations
-        </div>
-    )
+  return <div>recommendations</div>;
 }

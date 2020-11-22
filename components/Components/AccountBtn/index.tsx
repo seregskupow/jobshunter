@@ -1,10 +1,11 @@
 import "./style.scss";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link ,withTranslation} from "../../../i18n";
 import { FaUser } from "react-icons/fa";
 import { CgChevronDown } from "react-icons/cg";
-function AccountBtn({t}) {
+import { Link, withTranslation } from "../../../i18n";
+
+function AccountBtn({ t }) {
   const isAuth: boolean = useSelector((state) => state.user.isAuthenticated);
   const userName: string = useSelector((state) => state.user.userName);
   const userAvatar: string = useSelector((state) => state.user.userAvatar);
@@ -13,7 +14,6 @@ function AccountBtn({t}) {
     const img = new Image();
     img.onerror = () => {
       setImgError(true);
-      return;
     };
     img.src = userAvatar;
   }, [userAvatar, setImgError]);
@@ -32,24 +32,23 @@ function AccountBtn({t}) {
         </a>
       </Link>
     );
-  } else {
-    return (
-      <div className="user__acount__dropdown">
-        <div className="user__profile__logo">
-          {userAvatar === "" || imgError === true ? (
-            <ShortLogo userName={userName} />
-          ) : (
-            <img src={userAvatar} alt="" />
-          )}
-        </div>
-        <div className="user__account__btn">
-          <span>
-            <CgChevronDown />
-          </span>
-        </div>
-      </div>
-    );
   }
+  return (
+    <div className="user__acount__dropdown">
+      <div className="user__profile__logo">
+        {userAvatar === "" || imgError === true ? (
+          <ShortLogo userName={userName} />
+        ) : (
+          <img src={userAvatar} alt="" />
+        )}
+      </div>
+      <div className="user__account__btn">
+        <span>
+          <CgChevronDown />
+        </span>
+      </div>
+    </div>
+  );
 }
 export default withTranslation()(AccountBtn);
 
@@ -57,7 +56,7 @@ type shortLogo = {
   userName: string;
 };
 function ShortLogo({ userName }: shortLogo) {
-  //Получение первых букв юзернейма
+  // Получение первых букв юзернейма
   const wordsFromUsername: Array<string> = userName
     .split(" ")
     .map((item) => item.charAt(0));
