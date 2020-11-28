@@ -26,10 +26,10 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
       <h1>{t("vacancyListPage:title")}</h1>
       <GridContainer>
         <GridColumn>
-          <WhitePanel>
-            {posts &&
-              posts.slice(0, 20).map((post) => (
-                <div key={Math.random()} className="col-12 mb-3">
+          {posts &&
+            posts.slice(0, 20).map((post) => (
+              <WhitePanel key={Math.random()} margin={8}>
+                <div className="col-12 mb-3">
                   <div
                     className="card"
                     style={{ width: "100%" }}
@@ -39,7 +39,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
                       alt="..."
                       src={post.url}
                       effect="blur"
-                      style={{ height: "80px", width: "100%" }}
+                      style={{ height: "300px", width: "100%" }}
                     />
                     <div className="card-body">
                       <p
@@ -51,8 +51,8 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
                     </div>
                   </div>
                 </div>
-              ))}
-          </WhitePanel>
+              </WhitePanel>
+            ))}
         </GridColumn>
         <GridColumn>
           <WhitePanel>
@@ -78,14 +78,6 @@ export const getServerSideProps: GetServerSideProps = async (
   // limit for posts
   const limit: number =
     query.limit === undefined ? 5 : parseInt(query.limit.toString(), 10);
-  // test cookies req
-  // const test = await MyGet('http://localhost:5000/check',ctx);
-  // console.log(test);
-  // const test2 = await MyGet(
-  //   "http://a560c1c2fdb5.ngrok.io/api/profiles/all",
-  //   ctx
-  // );
-  // get posts
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/photos?_limit=${limit}`
   );

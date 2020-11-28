@@ -18,7 +18,7 @@
     // height: 50px;
     text-align: center;
 
-    box-shadow:$mediumShadow;
+    box-shadow: $mediumShadow;
     & fieldset {
         width: 100%;
         height: 100%;
@@ -32,30 +32,30 @@
     }
     & label {
         position: relative;
-        
+
         display: inline-block;
         float: left;
-        
+
         width: 50%;
 
-        padding:10px 0;
-        
+        padding: 10px 0;
+
         line-height: 2rem;
         font-size: 2rem;
-        color: $black;
-        
+        color: var(--color-text);
+
         transition: color 0.2s linear;
-        
-        border-bottom:2px solid $black;
+
+        border-bottom: 2px solid var(--color-contrast);
 
         box-sizing: border-box;
-        
+
         cursor: pointer;
-        
+
         z-index: 1;
     }
     & .tab-toggled {
-        color: $white !important;
+        color: var(--dark-text) !important;
     }
     & .switch {
         position: absolute;
@@ -63,13 +63,13 @@
         left: 0px;
         height: 100%;
         width: 50%;
-        background-color: $black;
+        background-color: var(--color-contrast);
         -webkit-transition: -webkit-transform 0.5s;
         -moz-transition: -moz-transform 0.5s;
         transition: transform 0.5s;
     }
-    &  input[type="radio"]:checked + label + .switch,
-      input[type="radio"]:checked + label:nth-of-type(n) + .switch {
+    & input[type="radio"]:checked + label + .switch,
+    input[type="radio"]:checked + label:nth-of-type(n) + .switch {
         -webkit-transform: translateX(100%);
         -moz-transform: translateX(100%);
         -ms-transform: translateX(100%);
@@ -77,7 +77,7 @@
         transform: translateX(100%);
     }
 }
-.tab__items{
+.tab__items {
     width: 100%;
     padding: 20px 0;
 }

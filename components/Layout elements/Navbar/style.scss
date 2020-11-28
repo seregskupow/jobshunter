@@ -1,54 +1,57 @@
-@import '../../../styles/utils/colors';
-@import '../../../styles/utils/sizes';
-@import '../../../styles/utils/media';
-@import '../../../styles/utils/shadows';
-header{
-    width:100%;
-}
-.header__top{
-    width:100%;
-    height:50px;
-    background:$primary;
+@import "../../../styles/utils/colors";
+@import "../../../styles/utils/sizes";
+@import "../../../styles/utils/media";
+@import "../../../styles/utils/shadows";
+header {
+    width: 100%;
 
+    background-color: var(--color-primary);
+
+    color: var(--color-text);
+
+    box-shadow: $mediumShadow;
 }
-.hot-links{
-    display:flex;
-    & li:not(:first-child):not(:last-child){
-        margin:0 10px 0 10px;
+.header__top {
+    width: 100%;
+    height: 50px;
+
+    border-bottom: 3px solid var(--color-text);
+}
+.hot-links {
+    display: flex;
+    & li:not(:first-child):not(:last-child) {
+        margin: 0 10px 0 10px;
     }
-    & li{
+    & li {
         display: flex;
         align-items: center;
         justify-content: center;
-        & .hot-links__item__link{
-            color:$white;
-            font-size:1.8rem;
+        & .hot-links__item__link {
+            font-size: 1.8rem;
             line-height: 1.8rem;
         }
     }
 }
-.header__bottom{
-    width:100%;
-    height:70px;
-    background: $darkGrey;
+.header__bottom {
+    width: 100%;
+    height: 70px;
 }
-.header__inner{
-    width:100%;
+.header__inner {
+    width: 100%;
     height: 100%;
     max-width: $maxWidth;
     margin: 0 auto;
-   
 }
-.header__inner__top__inner{
+.header__inner__top__inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.header__inner__bottom__inner{
+.header__inner__bottom__inner {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
 }
-.bottom__inner__item{
+.bottom__inner__item {
     display: flex;
     align-items: center;
 }

@@ -1,14 +1,14 @@
-@import '../../../styles/utils/borders';
-@import '../../../styles/utils/colors.scss';
-@import '../../../styles/utils/shadows.scss';
+@import "../../../styles/utils/borders";
+@import "../../../styles/utils/colors.scss";
+@import "../../../styles/utils/shadows.scss";
 
-.white__panel{
+.white__panel {
     box-sizing: border-box;
-    background-color:$white;
+    background-color: var(--color-primary);
 
     border-radius: $panelsBRD;
 
     box-shadow: $mediumShadow;
-    
-    overflow:hidden;
+
+    overflow: hidden;
 }

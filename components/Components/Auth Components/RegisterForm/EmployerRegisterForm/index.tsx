@@ -52,6 +52,7 @@ export default function EmployerRegisterForm({ t }: { readonly t: TFunction }) {
             </Form>
           )}
         </Formik>
+        <ProviderButtons />
         <LanguageSwitcher />
       </CenteredContainer>
     </motion.div>

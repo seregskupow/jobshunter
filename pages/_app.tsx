@@ -1,7 +1,8 @@
 import "../styles/main.scss";
+// eslint-disable-next-line no-use-before-define
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 // eslint-disable-next-line no-use-before-define
-import React from "react";
 import { useStore, initializeStore } from "../redux/store";
 import { appWithTranslation } from "../i18n";
 
@@ -10,6 +11,10 @@ import { loginUser } from "../redux/actions/authAction";
 function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
   const Layout = Component.Layout ? Component.Layout : React.Fragment;
+  useEffect(() => {
+    const theme: string = localStorage.getItem("theme");
+    document.body.classList.add(theme);
+  }, []);
   return (
     <Provider store={store}>
       <Layout>

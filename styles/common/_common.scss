@@ -1,30 +1,35 @@
-html{
-    font-size:10px;
+html {
+    font-size: 10px;
     box-sizing: border-box;
+
     &:focus {
         outline: none;
-      }
+    }
 }
 *,
 body {
     margin: 0;
     padding: 0;
 }
-body{
-    background-color: $darkWhite;
-    font-family: 'Rubik', sans-serif;
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: "Rubik", sans-serif;
+    line-height: 1.5;
+    transition: all 0.15s ease;
 }
-ul{
+ul {
     list-style: none;
 }
-a{
+a {
     text-decoration: none;
-    color:$blue;
+    color: $blue;
 }
-button{
-    border:none;
-    background:none;
+button {
+    border: none;
 }
-textarea:focus, input:focus, button:focus{
+textarea:focus,
+input:focus,
+button:focus {
     outline: none;
 }

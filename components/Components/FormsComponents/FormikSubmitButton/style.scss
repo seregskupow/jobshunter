@@ -1,34 +1,34 @@
 @import "../../../../styles/utils/colors";
 @import "../../../../styles/utils/shadows";
 @import "../../../../styles/utils/borders";
-.button__container{
+.button__container {
     width: 100%;
 
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-.formik__submit__button{
-    width:auto;
+.formik__submit__button {
+    width: auto;
 
-    padding:8px 20px;
+    padding: 8px 20px;
 
     font-size: 2rem;
-    color:$white;
+    color: var(--dark-text);
 
-    background:$black;
+    background: var(--color-contrast);
 
-    border:none;
+    border: none;
     border-radius: $blocksBRD;
 
     box-shadow: $mediumShadow;
 
     cursor: pointer;
 
-    transition: all .3s linear;
+    transition: all 0.3s linear;
 
-    &:hover{
+    &:hover {
         box-shadow: $smallShadow;
-        background: $lightBlack;
+        filter: brightness(0.6);
     }
 }

@@ -1,5 +1,5 @@
-@import '../../../../styles/utils/colors';
+@import "../../../../styles/utils/colors";
 
-.formik__label{
-    color:$black;
+.formik__label {
+    color: var(--color-text);
 }

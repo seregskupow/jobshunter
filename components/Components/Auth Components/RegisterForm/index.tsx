@@ -26,12 +26,6 @@ export default function RegisterForm({ t }: { readonly t: TFunction }) {
       <WhitePanel width={100} padding={0}>
         <div className="register__form__inner">
           <div className="tab__group">
-            {/* <li className={`tab ${activeTab==="employer" &&"tab_active"}`}>
-              <button onClick={() => setTab("employer")}>Employer</button>
-            </li>
-            <li className={`tab ${activeTab==="employee" &&"tab_active"}`}>
-              <button onClick={() => setTab("employee")}>Employee</button>
-            </li> */}
             <fieldset>
               <input
                 type="radio"
