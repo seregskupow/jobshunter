@@ -5,10 +5,10 @@ import { Provider } from "react-redux";
 // eslint-disable-next-line no-use-before-define
 import { useStore, initializeStore } from "../redux/store";
 import { appWithTranslation } from "../i18n";
-
+import myGet from "./api/myGet";
 import { loginUser } from "../redux/actions/authAction";
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   const store = useStore(pageProps.initialReduxState);
   const Layout = Component.Layout ? Component.Layout : React.Fragment;
   useEffect(() => {
@@ -18,11 +18,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Layout>
-        <Component {...pageProps} />
+        <Component {...pageProps} key={Math.random()} />
       </Layout>
     </Provider>
   );
-}
+};
 MyApp.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};
   if (Component.getInitialProps) {
@@ -30,22 +30,12 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   }
   const reduxStore = initializeStore();
   const { dispatch } = reduxStore;
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/photos?_limit=1`
-  );
-  const { email } = await res.json();
-  dispatch(
-    loginUser({
-      userName: email,
-      userAvatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQANrTXnjdRhO_W-elE9zX1R2bTzC6rVMeQBw&usqp=CAU",
-    })
-  );
-  //  await dispatch({
-  //     type:"AUTH_SIGN_IN",
-  //     payload:{userName:"serega Kovalev", isAuthenticated: !!res,userAvatar:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQANrTXnjdRhO_W-elE9zX1R2bTzC6rVMeQBw&usqp=CAU'}
-  //   })
-
+  try {
+    const user = await myGet("http://localhost:5000/checkauth", ctx);
+    if (user && user.isAuth) {
+      dispatch(loginUser(user));
+    }
+  } catch (error) {}
   return {
     pageProps: { initialReduxState: reduxStore.getState() },
   };

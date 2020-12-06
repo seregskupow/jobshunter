@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Layout, {
   variants,
 } from "../../components/Layout elements/Layout/Layout";
-import { withTranslation } from "../../i18n";
+import { Link, withTranslation } from "../../i18n";
 
 function BlogSec() {
   return (
@@ -11,10 +11,13 @@ function BlogSec() {
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={{ duration: 5 }}
+      transition={{ duration: 0.5 }}
     >
       <div>
         <h1>blog2</h1>
+        <Link href="/">
+          <a>home</a>
+        </Link>
       </div>
     </motion.div>
   );

@@ -61,7 +61,7 @@ const AuthLayout: FunctionComponent<any> = (props) => {
 };
 export default AuthLayout;
 export const variants = {
-  initial: { opacity: 0, y: -100 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -200 },
+  initial: { opacity: 0, scale: 0.9 },
+  animate: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.9 },
 };

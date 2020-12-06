@@ -1,9 +1,9 @@
 import axios from "axios";
 import Router from "next/router";
 import * as t from "../types";
-import { MyGet } from "../../pages/api/myGet";
 
-const server = "http://localhost:8080/api/users";
+// const server = "http://localhost:8080/api/users";
+const server = "http://localhost:5000";
 // const server:string = 'http://localhost:1337/api/auth';
 export const oauthGoogle = (data) => {
   return async (dispatch) => {
@@ -55,30 +55,11 @@ export const signUp = (data) => {
 export const signIn = (data) => {
   return async (dispatch) => {
     try {
-      dispatch({
-        type: t.AUTH_LOADING,
-        payload: true,
-      });
-
       // server = http://localhost:8080/api/users
       const resp = await axios.post(`${server}/login`, data, {
         withCredentials: true,
       });
       console.log({ resp });
-
-      // const resp = await fetch(`${server}/login`, {
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   mode: "cors",
-      //   credentials: "include",
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     email: "sejiso8040@septicvernon.com",
-      //     password: "saddsadsadsaddds",
-      //   }),
-      // });
-      // console.log(await resp.json());
       dispatch({
         type: t.AUTH_SIGN_IN,
         payload: data,
@@ -99,7 +80,6 @@ export const loginUser = (data) => {
         type: t.AUTH_SIGN_IN,
         payload: {
           ...data,
-          lastSearchKey: "govno",
         },
       });
     } catch (err) {

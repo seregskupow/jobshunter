@@ -13,7 +13,7 @@ import MainContainer from "../components/Layout elements/MainContainer";
 import GridContainer from "../components/Layout elements/GridContainer/GridContainer";
 import GridColumn from "../components/Layout elements/GridContainer/GridColumn";
 import WhitePanel from "../components/Layout elements/WhitePanel";
-import { MyGet } from "./api/myGet";
+import MyGet from "./api/myGet";
 
 function vacancylist({
   posts,

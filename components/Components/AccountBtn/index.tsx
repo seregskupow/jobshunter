@@ -10,6 +10,7 @@ function AccountBtn({ t }) {
   const userName: string = useSelector((state) => state.user.userName);
   const userAvatar: string = useSelector((state) => state.user.userAvatar);
   const [imgError, setImgError] = useState(false);
+  console.log(userName);
   useEffect(() => {
     const img = new Image();
     img.onerror = () => {

@@ -1,13 +1,15 @@
 import { GetServerSidePropsContext } from "next";
 
-export async function MyGet(url: string, ctx: GetServerSidePropsContext) {
+export default async function MyGet(
+  url: string,
+  ctx: GetServerSidePropsContext
+) {
   const cookie = ctx.req?.headers.cookie;
-  console.log({ cookie });
   const resp = await fetch(url, {
     headers: {
       cookie: cookie!,
-      credentials: "include",
     },
+    credentials: "include",
   });
   if (resp.status === 401) {
     // ctx.res?.writeHead(302,{
@@ -17,5 +19,6 @@ export async function MyGet(url: string, ctx: GetServerSidePropsContext) {
     return;
   }
   const json = await resp.json();
+  console.log(json);
   return json;
 }

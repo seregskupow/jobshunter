@@ -2,6 +2,7 @@ import "../inputs.scss";
 import "./style.scss";
 import { useState } from "react";
 import { TFunction } from "next-i18next";
+import { AnimatePresence } from "framer-motion";
 import WhitePanel from "../../../Layout elements/WhitePanel";
 import EmployeeRegisterForm from "./EmployeeRegisterForm";
 import EmployerRegisterForm from "./EmployerRegisterForm";
@@ -12,13 +13,13 @@ export default function RegisterForm({ t }: { readonly t: TFunction }) {
   let componentToRender: React.ReactNode;
   switch (activeTab) {
     case "employer":
-      componentToRender = <EmployerRegisterForm t={t} />;
+      componentToRender = <EmployerRegisterForm key={Math.random()} t={t} />;
       break;
     case "employee":
-      componentToRender = <EmployeeRegisterForm t={t} />;
+      componentToRender = <EmployeeRegisterForm key={Math.random()} t={t} />;
       break;
     default:
-      componentToRender = <EmployerRegisterForm t={t} />;
+      componentToRender = <EmployerRegisterForm key={Math.random()} t={t} />;
       break;
   }
   return (
@@ -55,7 +56,11 @@ export default function RegisterForm({ t }: { readonly t: TFunction }) {
               <span className="switch" />
             </fieldset>
           </div>
-          <div className="tab__items">{componentToRender}</div>
+          <div className="tab__items">
+            <AnimatePresence exitBeforeEnter>
+              {componentToRender}
+            </AnimatePresence>
+          </div>
         </div>
       </WhitePanel>
     </div>

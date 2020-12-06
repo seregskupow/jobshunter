@@ -17,6 +17,7 @@ export default function EmployerRegisterForm({ t }: { readonly t: TFunction }) {
     <motion.div
       initial={{ x: "-100%" }}
       animate={{ x: "0%" }}
+      exit={{ x: "-100%" }}
       transition={{ duration: 0.3 }}
     >
       <CenteredContainer direction="column" align="center">
