@@ -7,7 +7,7 @@ type linkType = {
   color?: "black" | "white";
 };
 
-const Logo: FunctionComponent<any> = ({ color = "white" }: linkType) => {
+const Logo: FunctionComponent<linkType> = ({ color = "white" }) => {
   return (
     <Link href="/">
       <a className={`logo logo_${color}`}>

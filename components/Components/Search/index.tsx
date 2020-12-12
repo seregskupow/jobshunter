@@ -3,7 +3,9 @@ import { GetServerSideProps } from "next";
 import Router, { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { GoSearch } from "react-icons/go";
 import { withTranslation } from "../../../i18n";
+import SettingsIcon from "../../../public/images/icons/search/setting-lines.svg";
 
 function Search({ t }) {
   const router = useRouter();
@@ -21,27 +23,39 @@ function Search({ t }) {
       setSearch(defaultSearchParam);
     }
   }, [defaultSearchParam, setSearch]);
-  const onSearchSubmit = (e) => {
+  const onSearchSubmit = (e: React.SyntheticEvent<EventTarget>) => {
+    e.preventDefault();
+    Router.push({
+      pathname: "/vacancylist",
+      query: { limit: 10, search: searchValue },
+    });
+  };
+  const keyDownHandler = (e: any) => {
     if (e.key === "Enter") {
-      Router.push({
-        pathname: "/vacancylist",
-        query: { limit: 10, search: searchValue },
-      });
+      onSearchSubmit(e);
     }
   };
   return (
     <div className="search">
-      <div className="search__field">
-        <input
-          type="search"
-          placeholder={t("searchPlaceholder")}
-          value={searchValue}
-          onKeyDown={(e) => onSearchSubmit(e)}
-          onChange={(e) => onInputChange(e.target.value)}
-          name=""
-          id=""
-        />
-      </div>
+      <form action="#" onSubmit={(e) => onSearchSubmit(e)}>
+        <div className="search__field">
+          <input
+            type="search"
+            placeholder={t("searchPlaceholder")}
+            value={searchValue}
+            onKeyDown={(e) => keyDownHandler(e)}
+            onChange={(e) => onInputChange(e.target.value)}
+            name=""
+            id=""
+          />
+          <button type="submit" className="search__btn">
+            <GoSearch />
+          </button>
+        </div>
+        <button type="button" className="settings__btn">
+          <SettingsIcon />
+        </button>
+      </form>
     </div>
   );
 }

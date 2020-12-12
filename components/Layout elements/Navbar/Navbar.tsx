@@ -11,10 +11,12 @@ import FormikSubmitButton from "../../Components/FormsComponents/FormikSubmitBut
 function Navbar({ t }) {
   return (
     <header>
-      <div className="header__top">
-        <div className="header__inner header__inner__top__inner">
-          <ThemeToggle />
-          <LanguageSwitcher />
+      <div className="header__inner">
+        <div className="header__left">
+          <Logo color="white" />
+          <Search />
+        </div>
+        <div className="header__right">
           <ul className="hot-links">
             <li className="hot-links__item">
               <Link href="/blog/blog2">
@@ -28,22 +30,8 @@ function Navbar({ t }) {
                 </a>
               </Link>
             </li>
-            <li className="hot-links__item">
-              <AccountBtn />
-            </li>
           </ul>
-        </div>
-      </div>
-      <div className="header__bottom">
-        <div className="header__inner header__inner__bottom__inner">
-          <div className="bottom__inner__item">
-            <Logo color="black" />
-          </div>
-          <div className="bottom__inner__item">
-            <Search />
-            <Search />
-            <FormikSubmitButton isSubmitting={false} margin={0} text="Пошук" />
-          </div>
+          <AccountBtn />
         </div>
       </div>
     </header>

@@ -2,7 +2,7 @@ import axios from "axios";
 import Router from "next/router";
 import * as t from "../types";
 
-// const server = "http://localhost:8080/api/users";
+// const server = " http://localhost:8080/api/users";
 const server = "http://localhost:5000";
 // const server:string = 'http://localhost:1337/api/auth';
 export const oauthGoogle = (data) => {
