@@ -19,9 +19,7 @@ function LanguageSwitcher() {
         <label
           htmlFor="lang-ukr"
           className={`${language === "ua" ? "lang-toggled" : ""}`}
-        >
-          УКР
-        </label>
+        />
         <input
           type="radio"
           checked={language === "ru" && true}
@@ -31,9 +29,7 @@ function LanguageSwitcher() {
         <label
           htmlFor="lang-rus"
           className={`${language === "ru" ? "lang-toggled" : ""}`}
-        >
-          РУС
-        </label>
+        />
         <span className="switch" />
       </fieldset>
     </div>

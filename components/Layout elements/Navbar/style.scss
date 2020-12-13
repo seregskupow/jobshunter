@@ -4,7 +4,7 @@
 @import "../../../styles/utils/shadows";
 
 header {
-    height: 50px;
+    height: 60px;
 
     display: inline-flex;
     flex-direction: row;
@@ -15,6 +15,8 @@ header {
     left: 0;
     right: 0;
     top: 0;
+
+    border-top: 1px solid var(--color-contrast);
 
     z-index: 80;
 }

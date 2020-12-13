@@ -2,12 +2,11 @@
 @import "../../../styles/utils/shadows";
 
 .language-switcher fieldset {
-    display: block;
+    display: flex;
     position: relative;
     padding: 2px;
-    border:none;
+    border: none;
     border-radius: 50em;
-   
 }
 
 .language-switcher input[type="radio"] {
@@ -16,21 +15,26 @@
 }
 
 .language-switcher {
-    background:$black;
-    
-    border-radius:50em;
-    border: 2px solid $white;
+    width: 36px;
+    height: 18px;
+
+    background: rgb(48, 185, 48);
+
+    border-radius: 50em;
+    border: 1px solid var(--color-border);
 
     text-align: center;
 
-    box-shadow:$mediumShadow;
+    margin: 0 5px;
+
+    box-shadow: $mediumShadow;
     & label {
         position: relative;
         z-index: 1;
         display: inline-block;
         float: left;
-        width: 40px;
-        height: 30px;
+        width: 18px;
+        height: 18px;
         line-height: 30px;
         cursor: pointer;
         font-size: 1rem;
@@ -45,10 +49,10 @@
 
 .language-switcher .switch {
     position: absolute;
-    top: 2px;
-    left: 2px;
-    height: 30px;
-    width: 40px;
+    top: 0px;
+    left: 0px;
+    height: 18px;
+    width: 50%;
     background-color: $white;
     border-radius: 50em;
     -webkit-transition: -webkit-transform 0.5s;
@@ -58,9 +62,9 @@
 
 .language-switcher input[type="radio"]:checked + label + .switch,
 .language-switcher input[type="radio"]:checked + label:nth-of-type(n) + .switch {
-    -webkit-transform: translateX(40px);
-    -moz-transform: translateX(40px);
-    -ms-transform: translateX(40px);
-    -o-transform: translateX(40px);
-    transform: translateX(40px);
+    -webkit-transform: translateX(18px);
+    -moz-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    -o-transform: translateX(18px);
+    transform: translateX(18px);
 }
