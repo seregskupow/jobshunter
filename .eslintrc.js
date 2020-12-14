@@ -33,6 +33,7 @@ module.exports = {
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": ["error", { custom: "ignore" }],
     "react/react-in-jsx-scope": "off",
+    "react/self-closing-comp": "off",
     "prettier/prettier": [
       "error",
       {

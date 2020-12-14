@@ -48,11 +48,11 @@ function Search({ t }) {
             name=""
             id=""
           />
-          <button type="submit" className="search__btn">
+          <button type="submit" className="search__btn btn__click">
             <GoSearch />
           </button>
         </div>
-        <button type="button" className="settings__btn">
+        <button type="button" className="settings__btn btn__click">
           <SettingsIcon />
         </button>
       </form>

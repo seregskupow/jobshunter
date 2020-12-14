@@ -1,12 +1,13 @@
 /* eslint-disable no-use-before-define */
 import "./style.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { FaUser, FaMoon } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { CgChevronDown } from "react-icons/cg";
 import { RiAccountBoxLine, RiLogoutCircleRLine } from "react-icons/ri";
 import { MdLanguage } from "react-icons/md";
 import { motion, AnimatePresence } from "framer-motion";
+import { AiFillFormatPainter } from "react-icons/ai";
 import { Link, withTranslation } from "../../../i18n";
 import ThemeToggle from "../ThemeToggle";
 import LanguageSwitcher from "../LanguageSwitcher";
@@ -15,8 +16,20 @@ function AccountBtn({ t }) {
   const isAuth: boolean = useSelector((state) => state.user.isAuthenticated);
   const userName: string = useSelector((state) => state.user.userName);
   const userAvatar: string = useSelector((state) => state.user.userAvatar);
+
   const [imgError, setImgError] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const accBtn = useRef<HTMLDivElement>(null);
+  const dropdown = useRef();
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener("mousedown", handleClick);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, []);
   useEffect(() => {
     const img = new Image();
     img.onerror = () => {
@@ -24,6 +37,15 @@ function AccountBtn({ t }) {
     };
     img.src = userAvatar;
   }, [userAvatar, setImgError]);
+
+  const handleClick = (e) => {
+    if (accBtn.current.contains(e.target)) {
+      // inside click
+      return;
+    }
+    // outside click
+    setOpen(false);
+  };
 
   const UserBtn = () => {
     return (
@@ -39,10 +61,10 @@ function AccountBtn({ t }) {
   };
 
   return (
-    <div className="user__acount">
+    <div className="user__acount" ref={accBtn}>
       <button
         type="button"
-        className="user__acount__btn"
+        className="user__acount__btn btn__click"
         onClick={() => setOpen(!open)}
       >
         {isAuth ? (
@@ -53,7 +75,7 @@ function AccountBtn({ t }) {
           </i>
         )}
         <i>
-          <CgChevronDown />
+          <CgChevronDown data-open={open} />
         </i>
       </button>
       <AnimatePresence exitBeforeEnter>
@@ -64,21 +86,33 @@ function AccountBtn({ t }) {
 }
 export default withTranslation()(AccountBtn);
 interface DropdownItemProps {
-  link: string;
+  link?: string;
   icon: any;
   children: React.ReactNode;
 }
-function DropdownMenu({ isAuth }: { isAuth: boolean }) {
-  function DropdownItem({ link, icon, children }: DropdownItemProps) {
+const DropdownMenu = ({ isAuth }: { isAuth: boolean }) => {
+  const DropdownItem: React.FC<DropdownItemProps> = ({
+    link,
+    icon,
+    children,
+  }) => {
+    if (link) {
+      return (
+        <Link href={link}>
+          <a className="dropdown__item">
+            <span className="item__left__icon">{icon}</span>
+            <span>{children}</span>
+          </a>
+        </Link>
+      );
+    }
     return (
-      <Link href={link}>
-        <a className="dropdown__item">
-          {icon}
-          <span>{children}</span>
-        </a>
-      </Link>
+      <div className="dropdown__item">
+        <span className="item__left__icon">{icon}</span>
+        {children}  
+      </div>
     );
-  }
+  };
 
   return (
     <motion.div
@@ -93,12 +127,12 @@ function DropdownMenu({ isAuth }: { isAuth: boolean }) {
           Account
         </DropdownItem>
       )}
-      <DropdownItem link="#" icon={<FaMoon />}>
+      <DropdownItem icon={<AiFillFormatPainter />}>
         <ThemeToggle />
       </DropdownItem>
-      <div className="dropdown__item">
-        <MdLanguage /> Укр <LanguageSwitcher /> Ру
-      </div>
+      <DropdownItem icon={<MdLanguage />}>
+        <span>Мова</span> <LanguageSwitcher />
+      </DropdownItem>
       {isAuth ? (
         <DropdownItem link="#" icon={<RiLogoutCircleRLine />}>
           Logout
@@ -110,7 +144,7 @@ function DropdownMenu({ isAuth }: { isAuth: boolean }) {
       )}
     </motion.div>
   );
-}
+};
 
 type shortLogo = {
   userName: string;

@@ -1,0 +1,8 @@
+.btn__click {
+  &:active {
+    transform: scale(0.95);
+  }
+}
+.notransition {
+  transition: none !important;
+}

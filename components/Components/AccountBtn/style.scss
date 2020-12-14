@@ -10,7 +10,7 @@
 
     background-color: var(--color-field);
     border: 1px solid var(--color-border);
-    border-radius: $blocksBRD;
+    border-radius: 8px;
 
     color: $white;
     font-size: 20px;
@@ -19,10 +19,19 @@
     & i {
         line-height: 15px;
         margin: 0 8px;
+        & svg {
+            transition: transform 0.2s ease;
+        }
+        & svg[data-open="true"] {
+            transform: rotate(-180deg);
+        }
+        & svg[data-open="false"] {
+            transform: rotate(0deg);
+        }
     }
     transition: background 0.3s ease;
     &:hover {
-        background: #4e4e4e;
+        background: var(--color-hover);
     }
 }
 .user__acount {
@@ -69,52 +78,42 @@
     top: 110%;
     right: 0;
 
-    width: 200px;
-
-    padding: 10px 0;
+    padding: 10px 5px;
 
     background-color: var(--color-primary);
     border: 1px solid var(--color-border);
-    border-radius: 10px;
+    border-radius: 8px;
 
     transform-origin: top;
 
     & .dropdown__item {
         display: flex;
-
+        align-items: center;
         box-sizing: border-box;
-        padding: 0 10px;
-        margin: 10px 0;
+        padding: 8px 8px;
 
         color: var(--color-text);
         font-size: 1.5rem;
 
-        & svg {
-            width: 20px;
-            height: 20px;
+        border-radius: 8px;
 
-            margin-right: 20px;
+        transition: background 0.2s ease;
 
-            fill: var(--color-contrast);
+        &:hover {
+            background-color: var(--color-hover);
         }
-    }
-}
-.user__account__btn {
-    height: 100%;
+        & span {
+            margin-right: 8px;
+        }
+        & .item__left__icon {
+            margin-right: 20px;
+            height: 20px;
+            & svg {
+                width: 20px;
+                height: 20px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0 5px 0 8px;
-
-    transition: filter 0.3s ease;
-    &:hover {
-        filter: brightness(1.5);
-    }
-    & span {
-        color: $lightGrey;
-        font-size: 3rem;
-        line-height: 2rem;
+                fill: var(--color-contrast);
+            }
+        }
     }
 }
