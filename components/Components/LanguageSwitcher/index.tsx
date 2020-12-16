@@ -16,7 +16,7 @@ function LanguageSwitcher() {
     <div className="language__switcher">
       <button
         type="button"
-        className="language__btn"
+        className="language__btn btn__click"
         onClick={() => i18n.changeLanguage("ua")}
       >
         UA
@@ -24,7 +24,7 @@ function LanguageSwitcher() {
       <Switch checked={language === "ua"} callback={() => toggleLang()} />
       <button
         type="button"
-        className="language__btn"
+        className="language__btn btn__click"
         onClick={() => i18n.changeLanguage("ru")}
       >
         RU

@@ -3,10 +3,14 @@ import "../styles/main.scss";
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 // eslint-disable-next-line no-use-before-define
+import { SWRConfig } from "swr";
+import axios from "axios";
 import { useStore, initializeStore } from "../redux/store";
 import { appWithTranslation } from "../i18n";
 import myGet from "./api/myGet";
 import { loginUser } from "../redux/actions/authAction";
+
+axios.defaults.baseURL = "http://localhost:5000";
 
 const MyApp = ({ Component, pageProps }) => {
   const store = useStore(pageProps.initialReduxState);
@@ -17,9 +21,13 @@ const MyApp = ({ Component, pageProps }) => {
   }, []);
   return (
     <Provider store={store}>
-      <Layout>
-        <Component {...pageProps} key={Math.random()} />
-      </Layout>
+      <SWRConfig
+        value={{ fetcher: (url: string) => axios(url).then((r) => r.data) }}
+      >
+        <Layout>
+          <Component {...pageProps} key={Math.random()} />
+        </Layout>
+      </SWRConfig>
     </Provider>
   );
 };

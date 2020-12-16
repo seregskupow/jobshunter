@@ -24,16 +24,18 @@ $darkBorder: #343536;
 $darkContrast: #ffd600;
 $darkContrastRGB: 255, 214, 0;
 $darkText: #eeeeee;
+$darkTextLight: #939393;
 
 //light theme
 $lightPrimary: #ffffff;
-$lightHover: #fde982;
+$lightHover: #e9e9e9;
 $lightInput: #e6e6e6;
 $lightBackground: #f1f1f1;
 $lightBorder: #edeff1;
 $lightContrast: #ffd600;
 $lightContrastRGB: 255, 214, 0;
 $lightText: #222831;
+$lightTextLight: #374150;
 
 :root {
     --color-primary: #{$lightPrimary};
@@ -45,6 +47,7 @@ $lightText: #222831;
     --color-contrast-rgb: #{$lightContrastRGB};
     --color-text: #{$lightText};
     --dark-text: #222831;
+    --text-light: #{$lightTextLight};
 }
 .dark {
     --color-primary: #{$darkPrimary};
@@ -56,4 +59,5 @@ $lightText: #222831;
     --color-contrast-rgb: #{$darkContrastRGB};
     --color-text: #{$darkText};
     --dark-text: #222831;
+    --text-light: #{$darkTextLight};
 }

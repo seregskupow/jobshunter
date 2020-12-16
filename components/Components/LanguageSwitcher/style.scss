@@ -7,6 +7,10 @@
 
     & .language__btn {
         color: var(--color-text);
+        font-weight: bolder;
+
+        transform: translateY(1px);
+
         cursor: pointer;
     }
 }

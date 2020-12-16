@@ -1,0 +1,144 @@
+.vacancy__card {
+  background-color: var(--color-primary);
+
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+
+  margin-bottom: 20px;
+  transition: box-shadow 0.1s ease;
+
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 0 1px 4px rgba(var(--color-contrast-rgb), 0.5);
+  }
+  & .btn__save {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
+
+    & svg {
+      fill: var(--color-contrast);
+
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.vacancy__card__body {
+  padding: 20px;
+
+  & .vacancy__icon {
+    height: 20px;
+    width: 20px;
+
+    fill: var(--color-contrast);
+    margin-right: 8px;
+  }
+
+  & .card__p {
+    display: flex;
+    align-items: center;
+  }
+
+  & .card__body__top {
+    padding-bottom: 5px;
+
+    margin-bottom: 10px;
+
+    border-bottom: 2px solid var(--color-border);
+    & .vacancy__title {
+      color: var(--color-contrast);
+      font-weight: 500;
+      font-size: 2.5rem;
+    }
+  }
+
+  & .main__content {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    & .info {
+      color: var(--color-text);
+      & .company__name {
+        font-size: 2rem;
+        font-weight: 300;
+      }
+
+      & .salary {
+        font-size: 2.2rem;
+        font-weight: 500;
+      }
+
+      & .location {
+        font-size: 1.8rem;
+      }
+    }
+    & .copmany__logo {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 8px;
+
+      overflow: hidden;
+
+      & img {
+        width: 100%;
+
+        transition: all 0.2s ease;
+
+        &:hover {
+          filter: brightness(1.2);
+        }
+      }
+    }
+  }
+
+  & .short__description {
+    color: var(--text-light);
+
+    font-size: 1.4rem;
+
+    & .dots {
+      line-height: 1.4rem;
+      color: var(--color-contrast);
+      font-size: 2.7rem;
+      font-weight: bold;
+
+      margin-left: 5px;
+    }
+  }
+
+  & .benefits {
+    display: flex;
+
+    & .benefit__item {
+      color: var(--color-contrast);
+
+      background-color: var(--color-hover);
+
+      font-size: 1.5rem;
+      font-weight: 300;
+
+      padding: 5px 10px;
+
+      border-radius: 20px;
+
+      margin: 10px 5px 0 0;
+    }
+  }
+}

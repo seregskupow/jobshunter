@@ -6,6 +6,11 @@ import {
 } from "next";
 
 import { GetServerSidePropsContext } from "next-redux-wrapper";
+import useSWR from "swr";
+import { useRouter } from "next/router";
+import { stringify } from "querystring";
+import { useState } from "react";
+import deepEqual from "fast-deep-equal";
 import Layout from "../components/Layout elements/Layout/Layout";
 import { Router, withTranslation } from "../i18n";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -14,46 +19,26 @@ import GridContainer from "../components/Layout elements/GridContainer/GridConta
 import GridColumn from "../components/Layout elements/GridContainer/GridColumn";
 import WhitePanel from "../components/Layout elements/WhitePanel";
 import MyGet from "./api/myGet";
+import VacancyCard, {
+  VacancyCardProps,
+} from "../components/Components/Vacancies components/VacancyCard";
 
 function vacancylist({
-  posts,
+  vacancies,
   searchKeyword,
   t,
 }: // eslint-disable-next-line no-use-before-define
 InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const { query } = useRouter();
+  const [serverQuery] = useState(query);
+  const { data } = useSWR(`/jobs?${stringify(query)}`, {
+    dedupingInterval: 15000,
+    initialData: deepEqual(query, serverQuery) ? vacancies : undefined,
+  });
   return (
     <MainContainer>
       <h1>{t("vacancyListPage:title")}</h1>
       <GridContainer>
-        <GridColumn>
-          {posts &&
-            posts.slice(0, 20).map((post) => (
-              <WhitePanel key={Math.random()} margin={8}>
-                <div className="col-12 mb-3">
-                  <div
-                    className="card"
-                    style={{ width: "100%" }}
-                    key={Math.random()}
-                  >
-                    <LazyLoadImage
-                      alt="..."
-                      src={post.url}
-                      effect="blur"
-                      style={{ height: "300px", width: "100%" }}
-                    />
-                    <div className="card-body">
-                      <p
-                        className="card-text"
-                        style={{ fontWeight: "bold", color: "#1A6DCF" }}
-                      >
-                        {post.title}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </WhitePanel>
-            ))}
-        </GridColumn>
         <GridColumn>
           <WhitePanel>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, ullam
@@ -64,27 +49,28 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
             cumque. Quaerat quo obcaecati perferendis recusandae?
           </WhitePanel>
         </GridColumn>
+        <GridColumn>
+          {data?.map((item: VacancyCardProps) => (
+            <VacancyCard key={item.id} {...item} />
+          ))}
+        </GridColumn>
       </GridContainer>
     </MainContainer>
   );
 }
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext
-) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { query } = ctx;
-  // search Jeyword from url or search
+  // search Keyword from url or search
   const searchKeyword: string =
     query.search === undefined ? "" : query.search.toString();
   // limit for posts
-  const limit: number =
-    query.limit === undefined ? 5 : parseInt(query.limit.toString(), 10);
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/photos?_limit=${limit}`
+  const vacancies = await MyGet(
+    `http://localhost:5000/jobs?${stringify(query)}`,
+    ctx
   );
-  const posts = await res.json();
   return {
     props: {
-      posts,
+      vacancies,
       searchKeyword,
       namespacesRequired: ["common", "vacancyListPage"],
     },
