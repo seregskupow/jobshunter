@@ -39,7 +39,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   const reduxStore = initializeStore();
   const { dispatch } = reduxStore;
   try {
-    const user = await myGet("http://localhost:5000/checkauth", ctx);
+    const [user, error] = await myGet(`${process.env.SERVER}/checkauth`, ctx);
     if (user && user.isAuth) {
       dispatch(loginUser(user));
     }

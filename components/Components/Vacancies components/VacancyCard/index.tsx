@@ -2,7 +2,9 @@ import "./style.scss";
 import { BsFillBagFill, BsBookmark } from "react-icons/bs";
 import { MdLocationOn } from "react-icons/md";
 import { FaMoneyBill } from "react-icons/fa";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "../../../../i18n";
+import Spinner from "../../Spinner";
 
 export interface VacancyCardProps {
   title: string;
@@ -55,7 +57,12 @@ const VacancyCard: React.FC<VacancyCardProps> = ({
               <div className="copmany__logo">
                 <Link href="#">
                   <a title={companyName}>
-                    <img src={logoUrl} alt="" />
+                    <LazyLoadImage
+                      alt={companyName}
+                      src={logoUrl}
+                      effect="blur"
+                      placeholderSrc="https://icon-library.com/images/photo-placeholder-icon/photo-placeholder-icon-6.jpg"
+                    />
                   </a>
                 </Link>
               </div>

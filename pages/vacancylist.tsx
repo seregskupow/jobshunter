@@ -1,18 +1,12 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import {
-  GetServerSideProps,
-  NextPageContext,
-  InferGetServerSidePropsType,
-} from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
-import { GetServerSidePropsContext } from "next-redux-wrapper";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { stringify } from "querystring";
 import { useState } from "react";
 import deepEqual from "fast-deep-equal";
 import Layout from "../components/Layout elements/Layout/Layout";
-import { Router, withTranslation } from "../i18n";
+import { withTranslation } from "../i18n";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import MainContainer from "../components/Layout elements/MainContainer";
 import GridContainer from "../components/Layout elements/GridContainer/GridContainer";
@@ -25,7 +19,6 @@ import VacancyCard, {
 
 function vacancylist({
   vacancies,
-  searchKeyword,
   t,
 }: // eslint-disable-next-line no-use-before-define
 InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -63,9 +56,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // search Keyword from url or search
   const searchKeyword: string =
     query.search === undefined ? "" : query.search.toString();
-  // limit for posts
-  const vacancies = await MyGet(
-    `http://localhost:5000/jobs?${stringify(query)}`,
+  const [vacancies, error] = await MyGet(
+    `${process.env.SERVER}/jobs?${stringify(query)}`,
     ctx
   );
   return {

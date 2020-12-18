@@ -17,7 +17,7 @@ export default function FormikSubmitButton({
       style={{ margin: `${`${margin.toString()}px`} 0px` }}
     >
       <button
-        className="formik__submit__button"
+        className="formik__submit__button btn__click"
         type="submit"
         disabled={isSubmitting}
       >
