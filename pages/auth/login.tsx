@@ -6,7 +6,7 @@ import WhitePanel from "../../components/Layout elements/WhitePanel";
 import AuthLayout, {
   variants,
 } from "../../components/Layout elements/AuthLayout";
-import LoginForm from "../../components/Components/Auth Components/LoginForm";
+import LoginForm from "../../components/Components By Page/Auth Components/LoginForm";
 
 const Login = ({ t }: { readonly t: TFunction }) => {
   return (

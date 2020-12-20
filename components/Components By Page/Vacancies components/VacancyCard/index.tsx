@@ -4,7 +4,8 @@ import { MdLocationOn } from "react-icons/md";
 import { FaMoneyBill } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "../../../../i18n";
-import Spinner from "../../Spinner";
+import Spinner from "../../../Components/Spinner";
+import Tooltip from "../../../Components/Tooltip";
 
 export interface VacancyCardProps {
   title: string;

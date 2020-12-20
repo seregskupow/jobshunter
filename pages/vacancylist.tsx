@@ -15,7 +15,7 @@ import WhitePanel from "../components/Layout elements/WhitePanel";
 import MyGet from "./api/myGet";
 import VacancyCard, {
   VacancyCardProps,
-} from "../components/Components/Vacancies components/VacancyCard";
+} from "../components/Components By Page/Vacancies components/VacancyCard";
 
 function vacancylist({
   vacancies,
@@ -69,4 +69,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   };
 };
 vacancylist.Layout = Layout;
-export default withTranslation("common")(vacancylist);
+export default withTranslation(["common", "vacancyListPage"])(vacancylist);

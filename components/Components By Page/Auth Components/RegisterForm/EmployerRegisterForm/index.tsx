@@ -5,10 +5,10 @@ import { TFunction } from "next-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import CenteredContainer from "../../../../Layout elements/CenteredContainer";
 import ProviderButtons from "../../ProvidersButtons";
-import FormikTextField from "../../../FormsComponents/FormikTextField";
-import FormikSubmitButton from "../../../FormsComponents/FormikSubmitButton";
-import LanguageSwitcher from "../../../LanguageSwitcher";
-import FormikLabel from "../../../FormsComponents/FormikLabel";
+import FormikTextField from "../../../../Components/FormsComponents/FormikTextField";
+import FormikSubmitButton from "../../../../Components/FormsComponents/FormikSubmitButton";
+import LanguageSwitcher from "../../../../Components/LanguageSwitcher";
+import FormikLabel from "../../../../Components/FormsComponents/FormikLabel";
 
 export default function EmployerRegisterForm({ t }: { readonly t: TFunction }) {
   const isLoading = useSelector((state) => state.user.isLoading);

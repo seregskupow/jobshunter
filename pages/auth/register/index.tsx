@@ -5,7 +5,7 @@ import CenteredContainer from "../../../components/Layout elements/CenteredConta
 import AuthLayout, {
   variants,
 } from "../../../components/Layout elements/AuthLayout";
-import RegisterForm from "../../../components/Components/Auth Components/RegisterForm";
+import RegisterForm from "../../../components/Components By Page/Auth Components/RegisterForm";
 
 function Register({ t }: { readonly t: TFunction }) {
   return (

@@ -1,0 +1,45 @@
+$tooltipMargin: 35px;
+
+.Tooltip-Wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.Tooltip-Tip {
+  position: absolute;
+  border-radius: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px;
+  color: var(--color-text);
+  background: var(--color-hover);
+  font-size: 14px;
+  font-family: sans-serif;
+  line-height: 1;
+  z-index: 100;
+  white-space: nowrap;
+}
+
+/* Absolute positioning */
+.Tooltip-Tip.top {
+  top: calc(#{$tooltipMargin} * -1);
+}
+/* Absolute positioning */
+.Tooltip-Tip.right {
+  left: calc(100% + #{$tooltipMargin});
+  top: 50%;
+  transform: translateX(0) translateY(-50%);
+}
+
+/* Absolute positioning */
+.Tooltip-Tip.bottom {
+  bottom: calc(#{$tooltipMargin} * -1);
+}
+
+/* Absolute positioning */
+.Tooltip-Tip.left {
+  left: auto;
+  right: calc(100% + #{$tooltipMargin});
+  top: 50%;
+  transform: translateX(0) translateY(-50%);
+}

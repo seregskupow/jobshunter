@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import CenteredContainer from "../../../../Layout elements/CenteredContainer";
 import ProviderButtons from "../../ProvidersButtons";
-import FormikTextField from "../../../FormsComponents/FormikTextField";
-import FormikSubmitButton from "../../../FormsComponents/FormikSubmitButton";
-import LanguageSwitcher from "../../../LanguageSwitcher";
-import FormikLabel from "../../../FormsComponents/FormikLabel";
-import MyLink from "../../../MyLink";
+import FormikTextField from "../../../../Components/FormsComponents/FormikTextField";
+import FormikSubmitButton from "../../../../Components/FormsComponents/FormikSubmitButton";
+import LanguageSwitcher from "../../../../Components/LanguageSwitcher";
+import FormikLabel from "../../../../Components/FormsComponents/FormikLabel";
+import MyLink from "../../../../Components/MyLink";
 import { signUp } from "../../../../../redux/actions/authAction";
 
 export default function EmployeeRegisterForm({ t }: { readonly t: TFunction }) {

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { GoSearch } from "react-icons/go";
 import { withTranslation } from "../../../i18n";
 import SettingsIcon from "../../../public/images/icons/search/setting-lines.svg";
+import Tooltip from "../Tooltip";
 
 function Search({ t }) {
   const router = useRouter();
@@ -52,9 +53,13 @@ function Search({ t }) {
             <GoSearch />
           </button>
         </div>
-        <button type="button" className="settings__btn btn__click">
-          <SettingsIcon />
-        </button>
+        <div className="settings__btn__wrapper">
+          <Tooltip content="Open filters">
+            <button type="button" className="settings__btn btn__click">
+              <SettingsIcon />
+            </button>
+          </Tooltip>
+        </div>
       </form>
     </div>
   );

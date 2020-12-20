@@ -7,12 +7,12 @@ import { TFunction } from "next-i18next";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import ProviderButtons from "../ProvidersButtons";
-import FormikTextField from "../../FormsComponents/FormikTextField";
-import FormikSubmitButton from "../../FormsComponents/FormikSubmitButton";
-import LanguageSwitcher from "../../LanguageSwitcher";
-import Logo from "../../Logo";
-import FormikLabel from "../../FormsComponents/FormikLabel";
-import MyLink from "../../MyLink";
+import FormikTextField from "../../../Components/FormsComponents/FormikTextField";
+import FormikSubmitButton from "../../../Components/FormsComponents/FormikSubmitButton";
+import LanguageSwitcher from "../../../Components/LanguageSwitcher";
+import Logo from "../../../Components/Logo";
+import FormikLabel from "../../../Components/FormsComponents/FormikLabel";
+import MyLink from "../../../Components/MyLink";
 import { signIn } from "../../../../redux/actions/authAction";
 
 export default function LoginForm({ t }: { readonly t: TFunction }) {

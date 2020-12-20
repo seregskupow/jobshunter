@@ -9,11 +9,12 @@
         display: inline-flex;
 
         width: 100%;
+        & .settings__btn__wrapper {
+            margin-left: 15px;
+        }
         & .settings__btn {
             height: 40px;
             width: 40px;
-
-            margin-left: 15px;
 
             display: flex;
             align-items: center;
