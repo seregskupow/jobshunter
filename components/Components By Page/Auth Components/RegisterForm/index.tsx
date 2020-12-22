@@ -3,7 +3,7 @@ import "./style.scss";
 import { useState } from "react";
 import { TFunction } from "next-i18next";
 import { AnimatePresence } from "framer-motion";
-import WhitePanel from "../../../Layout elements/WhitePanel";
+import WhitePanel from "../../../Layout elements/Panel";
 import EmployeeRegisterForm from "./EmployeeRegisterForm";
 import EmployerRegisterForm from "./EmployerRegisterForm";
 

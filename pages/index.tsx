@@ -4,7 +4,7 @@ import Layout, { variants } from "../components/Layout elements/Layout/Layout";
 import MainContainer from "../components/Layout elements/MainContainer";
 import GridContainer from "../components/Layout elements/GridContainer/GridContainer";
 import GridColumn from "../components/Layout elements/GridContainer/GridColumn";
-import WhitePanel from "../components/Layout elements/WhitePanel";
+import WhitePanel from "../components/Layout elements/Panel";
 
 function Home({ t }) {
   return (

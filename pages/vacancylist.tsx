@@ -11,11 +11,12 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import MainContainer from "../components/Layout elements/MainContainer";
 import GridContainer from "../components/Layout elements/GridContainer/GridContainer";
 import GridColumn from "../components/Layout elements/GridContainer/GridColumn";
-import WhitePanel from "../components/Layout elements/WhitePanel";
+import Panel from "../components/Layout elements/Panel";
 import MyGet from "./api/myGet";
 import VacancyCard, {
   VacancyCardProps,
 } from "../components/Components By Page/Vacancies components/VacancyCard";
+import Filter from "../components/Components By Page/Vacancies components/Filter";
 
 function vacancylist({
   vacancies,
@@ -33,14 +34,9 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
       <h1>{t("vacancyListPage:title")}</h1>
       <GridContainer>
         <GridColumn>
-          <WhitePanel>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, ullam
-            repudiandae porro commodi, quam enim itaque iste quo voluptate
-            similique libero culpa alias quod incidunt excepturi ab odio,
-            nesciunt dolorum dolor sapiente delectus. Labore accusamus
-            praesentium minima autem tenetur culpa obcaecati quod quidem. Fugit,
-            cumque. Quaerat quo obcaecati perferendis recusandae?
-          </WhitePanel>
+          <Panel padding={10}>
+            <Filter categories={[]} />
+          </Panel>
         </GridColumn>
         <GridColumn>
           {data?.map((item: VacancyCardProps) => (

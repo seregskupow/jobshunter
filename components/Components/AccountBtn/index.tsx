@@ -109,7 +109,7 @@ const DropdownMenu = ({ isAuth }: { isAuth: boolean }) => {
     return (
       <div className="dropdown__item">
         <span className="item__left__icon">{icon}</span>
-        {children}  
+        {children}
       </div>
     );
   };

@@ -2,7 +2,7 @@ import { TFunction } from "next-i18next";
 import { motion } from "framer-motion";
 import { withTranslation } from "../../i18n";
 import CenteredContainer from "../../components/Layout elements/CenteredContainer";
-import WhitePanel from "../../components/Layout elements/WhitePanel";
+import WhitePanel from "../../components/Layout elements/Panel";
 import AuthLayout, {
   variants,
 } from "../../components/Layout elements/AuthLayout";

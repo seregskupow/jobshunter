@@ -6,11 +6,7 @@ type fieldInputs = {
   name: string;
   margin?: number;
 };
-export default function FormikTextField({
-  type,
-  name,
-  margin = 6,
-}: fieldInputs) {
+const FormikTextField: React.FC<fieldInputs> = ({ type, name, margin = 6 }) => {
   const [field, meta] = useField(name);
   const errorClass = meta.error && meta.touched ? "field__error" : "";
   return (
@@ -28,4 +24,5 @@ export default function FormikTextField({
       />
     </div>
   );
-}
+};
+export default FormikTextField;

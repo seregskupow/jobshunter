@@ -6,27 +6,22 @@ export default async function MyGet(
   ctx: GetServerSidePropsContext
 ) {
   const cookie = ctx.req?.headers.cookie;
-  // const resp = await fetch(url, {
-  //   headers: {
-  //     cookie: cookie!,
-  //   },
-  //   credentials: "include",
-  // });
   try {
-    const { data, status } = await axios.get(url, {
+    const resp = await fetch(url, {
       headers: {
-        cookie,
+        cookie: cookie!,
       },
-      validateStatus: () => true,
-      withCredentials: true,
+      credentials: "include",
     });
-    if (status === 401) {
-      ctx.res?.writeHead(302, {
-        Location: "http://localhost:3000/auth/login",
-      });
-      ctx.res?.end();
+    if (resp.status === 401) {
+      ctx.res
+        ?.writeHead(302, {
+          Location: "http://localhost:3000/auth/login",
+        })
+        .end();
       return [null, null];
     }
+    const data = await resp.json();
     return [data, ""];
   } catch (error) {
     return [null, "server error occured"];
