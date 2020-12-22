@@ -20,7 +20,7 @@ const Filter: React.FC<FilterProps> = ({ categories }) => {
         <Formik initialValues={{}} onSubmit={async (values) => {}}>
           <Form>
             <Select options={opts} onChange={(val) => console.log(val)} />
-          </Form>
+            </Form>
         </Formik>
       </div>
     </div>

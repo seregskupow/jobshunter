@@ -34,7 +34,7 @@ const Select: React.FC<SelectProps> = ({
     options
   );
   const setCurrentOption = (opt) => {
-    const withMarkedSelectedOpt = controlledOptions.map((option) => {
+    const withMarkedSelectedOpt = options.map((option) => {
       if (option.label === opt.label) {
         return { ...option, isSelected: true };
       }
