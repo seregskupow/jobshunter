@@ -1,5 +1,6 @@
 .btn__click {
   &:active {
+    transition: 0.1s ease;
     transform: scale(0.95);
   }
 }

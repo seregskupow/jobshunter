@@ -6,12 +6,16 @@ interface FilterProps {
   categories: Array<string>;
 }
 const opts = [
-  { value: 123, label: "Value1" },
-  { value: 34, label: "Value2" },
-  { value: 23, label: "Value3" },
-  { value: 23, label: "Value4" },
-  { value: 23, label: "Value5" },
+  { value: 123, label: "Hui" },
+  { value: 34, label: "Huilo" },
+  { value: 23, label: "Pidor" },
+  { value: 23, label: "Pidoras" },
+  { value: 23, label: "Pidrila" },
   { value: 23, label: "Value6" },
+  { value: 23, label: "Value7" },
+  { value: 23, label: "Value8" },
+  { value: 23, label: "Value9" },
+  { value: 23, label: "Value10" },
 ];
 const Filter: React.FC<FilterProps> = ({ categories }) => {
   return (
@@ -20,7 +24,7 @@ const Filter: React.FC<FilterProps> = ({ categories }) => {
         <Formik initialValues={{}} onSubmit={async (values) => {}}>
           <Form>
             <Select options={opts} onChange={(val) => console.log(val)} />
-            </Form>
+          </Form>
         </Formik>
       </div>
     </div>
