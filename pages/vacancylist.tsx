@@ -3,8 +3,9 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { stringify } from "querystring";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import deepEqual from "fast-deep-equal";
+import { TFunction } from "next-i18next";
 import Layout from "../components/Layout elements/Layout/Layout";
 import { withTranslation } from "../i18n";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -17,12 +18,27 @@ import VacancyCard, {
   VacancyCardProps,
 } from "../components/Components By Page/Vacancies components/VacancyCard";
 import Filter from "../components/Components By Page/Vacancies components/Filter";
+import getAsString from "../helpers/getAsString";
+import { Option } from "../components/Components/FormsComponents/Select";
 
-function vacancylist({
+interface vacancyListProps {
+  vacancies: [];
+  categories: Array<Option>;
+  subCategories: Array<Option>;
+  errors: Array<string>;
+  readonly t: TFunction;
+  Layout: any;
+}
+interface PageComponent<T> extends React.FC<T> {
+  Layout: ReactNode;
+}
+const vacancylist: PageComponent<vacancyListProps> = ({
   vacancies,
+  categories,
+  subCategories,
+  errors,
   t,
-}: // eslint-disable-next-line no-use-before-define
-InferGetServerSidePropsType<typeof getServerSideProps>) {
+}) => {
   const { query } = useRouter();
   const [serverQuery] = useState(query);
   const { data } = useSWR(`/jobs?${stringify(query)}`, {
@@ -35,7 +51,7 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
       <GridContainer>
         <GridColumn>
           <Panel padding={10}>
-            <Filter categories={[]} />
+            <Filter categories={categories} subCategories={subCategories} />
           </Panel>
         </GridColumn>
         <GridColumn>
@@ -46,20 +62,21 @@ InferGetServerSidePropsType<typeof getServerSideProps>) {
       </GridContainer>
     </MainContainer>
   );
-}
+};
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { query } = ctx;
-  // search Keyword from url or search
-  const searchKeyword: string =
-    query.search === undefined ? "" : query.search.toString();
-  const [vacancies, error] = await MyGet(
-    `${process.env.SERVER}/jobs?${stringify(query)}`,
-    ctx
-  );
+  const category = getAsString(ctx.query.category);
+  const [vacancies, categories, subCategories] = await Promise.all([
+    MyGet(`${process.env.SERVER}/jobs?${stringify(query)}`, ctx),
+    MyGet(`${process.env.SERVER}/api/categories`, ctx),
+    MyGet(`${process.env.SERVER}/api/subcategories?category=${category}`, ctx),
+  ]);
   return {
     props: {
-      vacancies,
-      searchKeyword,
+      vacancies: vacancies.data,
+      categories: categories.data,
+      subCategories: subCategories.data,
+      errors: [vacancies.error, categories.error, subCategories.error],
       namespacesRequired: ["common", "vacancyListPage"],
     },
   };

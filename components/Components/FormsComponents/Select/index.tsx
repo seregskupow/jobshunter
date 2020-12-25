@@ -1,14 +1,11 @@
 /* eslint-disable no-use-before-define */
-import { useEffect, useState } from "react";
 import "./style.scss";
+import { useEffect, useState, Dispatch, useRef, SetStateAction } from "react";
 import { CgChevronDown } from "react-icons/cg";
-import { useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Dispatch } from "react";
-import { SetStateAction } from "react";
 import useKeyPress from "../../../../hooks/useKeypress";
 
-type Option = {
+export type Option = {
   value: string | number;
   label: string;
 };
@@ -22,6 +19,11 @@ interface SelectProps {
   value?: string;
   onChange(arg: string | number): void;
 }
+/**
+ * Loops through options array and marks selected option with flag isSelected
+ * @param options
+ * @param selected
+ */
 const markSelectedOption = (
   options: Array<Option>,
   selected: ExtendedOption
@@ -33,6 +35,14 @@ const markSelectedOption = (
     return { ...option, isSelected: false };
   });
 };
+/**
+ * Select component
+ * @param {Array<Option>} options Array of opions
+ * @param {Option} value Default value
+ * @param {boolean} isDisabled isDisabled - optional
+ * @param {boolean} isSearchable isSearchable  - enable options search
+ * @param {(arg: string | number)=> void} onChange onChange function that return value on Select value changed
+ */
 const Select: React.FC<SelectProps> = ({
   options,
   value,
@@ -43,6 +53,7 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   const selectBtn = useRef<HTMLInputElement | null>(null);
   const scrollContainer = useRef<HTMLInputElement | null>(null);
+
   const [isOpen, setOpen] = useState<boolean>(false);
   const [currentValue, setCurrValue] = useState<Option>(options[0]);
   const [controlledOptions, setCtrOptions] = useState<Array<ExtendedOption>>(
@@ -59,7 +70,7 @@ const Select: React.FC<SelectProps> = ({
   };
 
   useEffect(() => {
-    onChange(currentValue.label);
+    onChange(currentValue.value);
   }, [currentValue]);
   useEffect(() => {
     // add when mounted
@@ -81,6 +92,7 @@ const Select: React.FC<SelectProps> = ({
       }
     }
   }, [isOpen]);
+  // Change hovered option on keyDown event
   useEffect(() => {
     if (controlledOptions.length && downPress) {
       setCursor((prevState) =>
@@ -88,6 +100,7 @@ const Select: React.FC<SelectProps> = ({
       );
     }
   }, [downPress]);
+  // Change hovered option on keyUp event
   useEffect(() => {
     if (controlledOptions.length && upPress) {
       setCursor((prevState) =>
@@ -95,22 +108,29 @@ const Select: React.FC<SelectProps> = ({
       );
     }
   }, [upPress]);
+  // Set currentOption on Enter key pressed
   useEffect(() => {
     if (controlledOptions.length && enterPress) {
       setCurrentOption(controlledOptions[cursor]);
-      setOpen(false);
     }
-  }, [cursor, enterPress, setOpen, setCurrentOption]);
+  }, [cursor, enterPress]);
+  // Close dropdown when value changed
+  useEffect(() => {
+    setOpen(false);
+  }, [enterPress]);
+  // Set hovered option index
   useEffect(() => {
     if (controlledOptions.length && hovered) {
       setCursor(controlledOptions.indexOf(hovered));
     }
   }, [hovered]);
+  // Remove default page scroll behaviour when using arrows
   const removePageScroll = (e) => {
     if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
       e.preventDefault();
     }
   };
+  // Handle Select click scope
   const handleClick = (e) => {
     if (selectBtn.current.contains(e.target)) {
       // inside click
@@ -119,6 +139,7 @@ const Select: React.FC<SelectProps> = ({
     // outside click
     setOpen(false);
   };
+  // Tells if option should scroll into view if not fully visible on keyUp or keyDown
   const shouldScrollToView = (index) => {
     if (index === cursor && (downPress || upPress)) {
       return true;
@@ -184,50 +205,6 @@ const Select: React.FC<SelectProps> = ({
   );
 };
 export default Select;
-
-interface OptionsSearchProps {
-  options: Array<ExtendedOption>;
-  currentValue: Option;
-  updateOptions: Dispatch<SetStateAction<Array<ExtendedOption>>>;
-}
-
-const OptionsSearch: React.FC<OptionsSearchProps> = ({
-  options,
-  currentValue,
-  updateOptions,
-}) => {
-  const [search, setSearch] = useState<string>("");
-  const filterOptions = (input: string) => {
-    const filteredOptions = options.reduce((filtered, option) => {
-      if (
-        option.label.toLocaleLowerCase().includes(input.toLocaleLowerCase())
-      ) {
-        if (option.label === currentValue.label) {
-          filtered.push({ ...option, isSelected: true });
-        } else {
-          filtered.push(option);
-        }
-      }
-      return filtered;
-    }, []);
-    updateOptions(filteredOptions);
-  };
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-    filterOptions(e.target.value);
-  };
-  return (
-    <div className="select__search__container">
-      <input
-        placeholder="Type search..."
-        type="text"
-        value={search}
-        onChange={(e) => handleChange(e)}
-      />
-    </div>
-  );
-};
-
 interface SelectItemProps {
   item: Option;
   isPressed: boolean;
@@ -269,6 +246,53 @@ const SelectItem: React.FC<SelectItemProps> = ({
       onMouseLeave={() => setHovered(undefined)}
     >
       {item.label}
+    </div>
+  );
+};
+
+interface OptionsSearchProps {
+  options: Array<ExtendedOption>;
+  currentValue: Option;
+  updateOptions: Dispatch<SetStateAction<Array<ExtendedOption>>>;
+}
+
+const OptionsSearch: React.FC<OptionsSearchProps> = ({
+  options,
+  currentValue,
+  updateOptions,
+}) => {
+  const [search, setSearch] = useState<string>("");
+  /**
+   * Filter options that include searchinput value
+   * @param input
+   */
+  const filterOptions = (input: string) => {
+    const filteredOptions = options.reduce((filtered, option) => {
+      if (
+        option.label.toLocaleLowerCase().includes(input.toLocaleLowerCase())
+      ) {
+        if (option.label === currentValue.label) {
+          filtered.push({ ...option, isSelected: true });
+        } else {
+          filtered.push(option);
+        }
+      }
+      return filtered;
+    }, []);
+    updateOptions(filteredOptions);
+  };
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+    filterOptions(e.target.value);
+  };
+  return (
+    <div className="select__search__container">
+      <input
+        placeholder="Type search..."
+        type="text"
+        value={search}
+        onChange={(e) => handleChange(e)}
+      />
     </div>
   );
 };

@@ -56,11 +56,9 @@ export default function LoginForm({ t }: { readonly t: TFunction }) {
             dispatch(signIn(values));
             if (!isLoading) setSubmitting(false);
             // cookie test request
-            const testResponse = await fetch("http://localhost:5000/test");
             if (!error) {
               Router.push("/");
             }
-            console.log(await testResponse.json());
           }}
         >
           {({ isSubmitting }) => (
