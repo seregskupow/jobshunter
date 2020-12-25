@@ -1,3 +1,16 @@
+.jobs__filter {
+  position: sticky;
+  top: 0;
+}
+.filter__item {
+  margin-bottom: 1rem;
+
+  & .filter__item__title {
+    color: var(--color-contrast);
+
+    margin-bottom: 1rem;
+  }
+}
 .subcategories__container {
-  padding: 10px;
+  padding: 1rem;
 }

@@ -16,6 +16,12 @@
 
   transition: all 0.1s ease;
 
+  &:active {
+    & .checkmark {
+      transform: scale(0.9);
+    }
+  }
+
   &:hover {
     & input ~ &.checkmark {
       background-color: #ccc;

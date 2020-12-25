@@ -16,7 +16,7 @@ interface SelectProps {
   options: Array<Option>;
   isDisabled?: boolean;
   isSearchable?: boolean;
-  value?: string;
+  value?: ExtendedOption;
   onChange(arg: string | number): void;
 }
 /**
@@ -53,9 +53,8 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   const selectBtn = useRef<HTMLInputElement | null>(null);
   const scrollContainer = useRef<HTMLInputElement | null>(null);
-
   const [isOpen, setOpen] = useState<boolean>(false);
-  const [currentValue, setCurrValue] = useState<Option>(options[0]);
+  const [currentValue, setCurrValue] = useState<Option>(value);
   const [controlledOptions, setCtrOptions] = useState<Array<ExtendedOption>>(
     markSelectedOption(options, currentValue)
   );

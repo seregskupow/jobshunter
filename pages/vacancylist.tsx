@@ -6,6 +6,8 @@ import { stringify } from "querystring";
 import { ReactNode, useState } from "react";
 import deepEqual from "fast-deep-equal";
 import { TFunction } from "next-i18next";
+import { AnimatePresence } from "framer-motion";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import Layout from "../components/Layout elements/Layout/Layout";
 import { withTranslation } from "../i18n";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -23,8 +25,10 @@ import { Option } from "../components/Components/FormsComponents/Select";
 
 interface vacancyListProps {
   vacancies: [];
+  category: string;
   categories: Array<Option>;
   subCategories: Array<Option>;
+  initialSubcategories: Array<number>;
   errors: Array<string>;
   readonly t: TFunction;
   Layout: any;
@@ -34,6 +38,8 @@ interface PageComponent<T> extends React.FC<T> {
 }
 const vacancylist: PageComponent<vacancyListProps> = ({
   vacancies,
+  category,
+  initialSubcategories,
   categories,
   subCategories,
   errors,
@@ -51,13 +57,20 @@ const vacancylist: PageComponent<vacancyListProps> = ({
       <GridContainer>
         <GridColumn>
           <Panel padding={10}>
-            <Filter categories={categories} subCategories={subCategories} />
+            <Filter
+              category={category}
+              categories={categories}
+              initialSubcategories={initialSubcategories}
+              subCategories={subCategories}
+            />
           </Panel>
         </GridColumn>
         <GridColumn>
-          {data?.map((item: VacancyCardProps) => (
-            <VacancyCard key={item.id} {...item} />
-          ))}
+          <AnimatePresence exitBeforeEnter>
+            {data?.map((item: VacancyCardProps) => (
+              <VacancyCard key={Math.random()} {...item} />
+            ))}
+          </AnimatePresence>
         </GridColumn>
       </GridContainer>
     </MainContainer>
@@ -65,14 +78,25 @@ const vacancylist: PageComponent<vacancyListProps> = ({
 };
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { query } = ctx;
-  const category = getAsString(ctx.query.category);
+  const category: string = getAsString(query.category);
+  const subcategorieSrt: string = query.subcategories
+    ? query.subcategories.toString()
+    : "";
+  const subCatArr: Array<number> = subcategorieSrt
+    .split(",")
+    .filter((x) => x !== "")
+    .map((x) => +x);
   const [vacancies, categories, subCategories] = await Promise.all([
     MyGet(`${process.env.SERVER}/jobs?${stringify(query)}`, ctx),
     MyGet(`${process.env.SERVER}/api/categories`, ctx),
     MyGet(`${process.env.SERVER}/api/subcategories?category=${category}`, ctx),
   ]);
+  console.log({ subcategorieSrt });
+  console.log({ subCatArr });
   return {
     props: {
+      initialSubcategories: subCatArr,
+      category: category || null,
       vacancies: vacancies.data,
       categories: categories.data,
       subCategories: subCategories.data,

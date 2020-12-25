@@ -3,6 +3,7 @@ import { BsFillBagFill, BsBookmark } from "react-icons/bs";
 import { MdLocationOn } from "react-icons/md";
 import { FaMoneyBill } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { motion } from "framer-motion";
 import { Link } from "../../../../i18n";
 import Spinner from "../../../Components/Spinner";
 import Tooltip from "../../../Components/Tooltip";
@@ -30,7 +31,13 @@ const VacancyCard: React.FC<VacancyCardProps> = ({
   benefits = null,
 }) => {
   return (
-    <article className="vacancy__card">
+    <motion.article
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.3 }}
+      className="vacancy__card"
+    >
       <Link href="#">
         <a>
           <div className="vacancy__card__body">
@@ -84,7 +91,7 @@ const VacancyCard: React.FC<VacancyCardProps> = ({
           </div>
         </a>
       </Link>
-    </article>
+    </motion.article>
   );
 };
 export default VacancyCard;

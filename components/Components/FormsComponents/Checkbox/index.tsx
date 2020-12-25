@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import "./style.scss";
-import { Field, FieldProps } from "formik";
+import { Field, FieldProps, useFormikContext } from "formik";
 
 interface Props {
   name: string;
@@ -9,10 +9,14 @@ interface Props {
 }
 
 const Checkbox: React.FC<Props> = ({ value, name, label, ...props }) => {
+  const { submitForm } = useFormikContext();
+  const submitOnChange = () => {
+    setTimeout(submitForm, 500);
+  };
   return (
     <Field name={name}>
       {({ field, form }) => (
-        <label className="checkbox btn__click">
+        <label className="checkbox">
           {label}
           <input
             type="checkbox"
@@ -26,6 +30,7 @@ const Checkbox: React.FC<Props> = ({ value, name, label, ...props }) => {
                 const nextValue = field.value.concat(value);
                 form.setFieldValue(name, nextValue);
               }
+              submitOnChange();
             }}
           />
           <span className="checkmark"></span>
