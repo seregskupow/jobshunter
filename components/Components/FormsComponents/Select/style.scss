@@ -47,6 +47,10 @@
 
     & p {
       white-space: nowrap;
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
   }
   & .arrow {
@@ -126,6 +130,15 @@
       // &:hover {
       //   background-color: var(--color-hover);
       // }
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    & .match__bold {
+      font-weight: bold;
+      color: var(--color-contrast);
     }
 
     & .select__item[data-selected="true"] {

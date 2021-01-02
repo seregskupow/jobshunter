@@ -6,9 +6,9 @@ import { stringify } from "querystring";
 import { ReactNode, useState } from "react";
 import deepEqual from "fast-deep-equal";
 import { TFunction } from "next-i18next";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import Layout from "../components/Layout elements/Layout/Layout";
+import Layout, { variants } from "../components/Layout elements/Layout/Layout";
 import { withTranslation } from "../i18n";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import MainContainer from "../components/Layout elements/MainContainer";
@@ -22,6 +22,8 @@ import VacancyCard, {
 import Filter from "../components/Components By Page/Vacancies components/Filter";
 import getAsString from "../helpers/getAsString";
 import { Option } from "../components/Components/FormsComponents/Select";
+import Search from "../components/Components/Search";
+import "../styles/pages/vacancylist.scss";
 
 interface vacancyListProps {
   vacancies: [];
@@ -53,20 +55,30 @@ const vacancylist: PageComponent<vacancyListProps> = ({
   });
   return (
     <MainContainer>
-      <h1>{t("vacancyListPage:title")}</h1>
+      <div className="banner">
+        <h1 className="banner__title">Знайди роботу мрії</h1>
+      </div>
       <GridContainer>
         <GridColumn>
-          <Panel padding={10}>
-            <Filter
-              category={category}
-              categories={categories}
-              initialSubcategories={initialSubcategories}
-              subCategories={subCategories}
-            />
-          </Panel>
+          <aside className="sticky__filter">
+            <Panel padding={10}>
+              <Filter
+                category={category}
+                categories={categories}
+                initialSubcategories={initialSubcategories}
+                subCategories={subCategories}
+              />
+            </Panel>
+          </aside>
         </GridColumn>
         <GridColumn>
-          <AnimatePresence exitBeforeEnter>
+          <Search />
+          <div className="" style={{ marginBottom: "10px" }}></div>
+          <h2 style={{ color: "var(--color-contrast)" }}>
+            Найдено вакансий: {data?.length}
+          </h2>
+          <div className="" style={{ marginBottom: "20px" }}></div>
+          <AnimatePresence>
             {data?.map((item: VacancyCardProps) => (
               <VacancyCard key={Math.random()} {...item} />
             ))}
@@ -91,8 +103,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     MyGet(`${process.env.SERVER}/api/categories`, ctx),
     MyGet(`${process.env.SERVER}/api/subcategories?category=${category}`, ctx),
   ]);
-  console.log({ subcategorieSrt });
-  console.log({ subCatArr });
   return {
     props: {
       initialSubcategories: subCatArr,

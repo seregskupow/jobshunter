@@ -1,10 +1,10 @@
 import "./style.scss";
 import { GetServerSideProps } from "next";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { GoSearch } from "react-icons/go";
-import { withTranslation } from "../../../i18n";
+import { withTranslation, Router } from "../../../i18n";
 import SettingsIcon from "../../../public/images/icons/search/setting-lines.svg";
 import Tooltip from "../Tooltip";
 
@@ -28,7 +28,7 @@ function Search({ t }) {
     e.preventDefault();
     Router.push({
       pathname: "/vacancylist",
-      query: { limit: 10, search: searchValue },
+      query: { ...Router.query, search: searchValue },
     });
   };
   const keyDownHandler = (e: any) => {

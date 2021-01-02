@@ -62,7 +62,9 @@ const Layout = ({ children }) => {
         </Head>
         <Navbar />
         <div style={{ marginTop: "100px" }}>
-          <AnimatePresence exitBeforeEnter>{children}</AnimatePresence>
+          {/* <AnimatePresence exitBeforeEnter> */}
+          {children}
+          {/* </AnimatePresence> */}
         </div>
         <Footer />
       </motion.div>

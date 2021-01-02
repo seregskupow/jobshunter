@@ -7,6 +7,7 @@ import GridColumn from "../components/Layout elements/GridContainer/GridColumn";
 import WhitePanel from "../components/Layout elements/Panel";
 
 function Home({ t }) {
+  console.log("Index rendered");
   return (
     <motion.div
       variants={variants}
@@ -58,5 +59,6 @@ Home.getInitialProps = async () => {
     namespacesRequired: ["common", "indexPage"],
   };
 };
+
 Home.Layout = Layout;
 export default withTranslation()(Home);

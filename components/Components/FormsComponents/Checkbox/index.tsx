@@ -6,12 +6,13 @@ interface Props {
   name: string;
   value: string | number;
   label: string;
+  delay: number;
 }
 
-const Checkbox: React.FC<Props> = ({ value, name, label, ...props }) => {
+const Checkbox: React.FC<Props> = ({ value, name, delay, label, ...props }) => {
   const { submitForm } = useFormikContext();
   const submitOnChange = () => {
-    setTimeout(submitForm, 500);
+    setTimeout(submitForm, delay);
   };
   return (
     <Field name={name}>

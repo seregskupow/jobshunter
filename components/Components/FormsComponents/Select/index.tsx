@@ -3,6 +3,7 @@ import "./style.scss";
 import { useEffect, useState, Dispatch, useRef, SetStateAction } from "react";
 import { CgChevronDown } from "react-icons/cg";
 import { motion, AnimatePresence } from "framer-motion";
+import { isMobile } from "react-device-detect";
 import useKeyPress from "../../../../hooks/useKeypress";
 
 export type Option = {
@@ -29,7 +30,7 @@ const markSelectedOption = (
   selected: ExtendedOption
 ) => {
   return options?.map((option) => {
-    if (option.label === selected.label) {
+    if (option.label === selected?.label) {
       return { ...option, isSelected: true };
     }
     return { ...option, isSelected: false };
@@ -51,6 +52,7 @@ const Select: React.FC<SelectProps> = ({
   onChange,
   ...props
 }) => {
+  console.log({ value });
   const selectBtn = useRef<HTMLInputElement | null>(null);
   const scrollContainer = useRef<HTMLInputElement | null>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -62,14 +64,16 @@ const Select: React.FC<SelectProps> = ({
   const upPress = useKeyPress("ArrowUp", selectBtn);
   const enterPress = useKeyPress("Enter", selectBtn);
   const [cursor, setCursor] = useState<number>(0);
-  const [hovered, setHovered] = useState<ExtendedOption>(currentValue);
+  const [hovered, setHovered] = useState<ExtendedOption>(null);
   const setCurrentOption = (opt) => {
     setCtrOptions(markSelectedOption(options, opt));
-    setCurrValue(opt);
+    setCurrValue({
+      value: opt.value,
+      label: opt.label.replace(/<\/?[^>]+(>|$)/g, ""),
+    });
   };
-
   useEffect(() => {
-    onChange(currentValue.value);
+    hovered !== null && onChange(currentValue.value);
   }, [currentValue]);
   useEffect(() => {
     // add when mounted
@@ -158,7 +162,7 @@ const Select: React.FC<SelectProps> = ({
       >
         <div className="select__value__container">
           <div className="select__value">
-            <p>{currentValue.label}</p>
+            <p>{currentValue?.label}</p>
           </div>
           <div className="arrow">
             <CgChevronDown data-open={isOpen} />
@@ -239,12 +243,14 @@ const SelectItem: React.FC<SelectItemProps> = ({
       className={`select__item ${isSelected && "selected"}`}
       data-selected={isSelected}
       data-hovered={isHovered}
-      onClick={() => callback(item)}
+      onClick={() => {
+        callback(item);
+      }}
       onKeyDown={() => callback(item)}
-      onMouseEnter={() => setHovered(item)}
+      onMouseEnter={isMobile ? () => false : () => setHovered(item)}
       onMouseLeave={() => setHovered(undefined)}
     >
-      {item.label}
+      <p dangerouslySetInnerHTML={{ __html: item.label }}></p>
     </div>
   );
 };
@@ -267,13 +273,24 @@ const OptionsSearch: React.FC<OptionsSearchProps> = ({
    */
   const filterOptions = (input: string) => {
     const filteredOptions = options.reduce((filtered, option) => {
-      if (
-        option.label.toLocaleLowerCase().includes(input.toLocaleLowerCase())
-      ) {
+      if (option.label.toLowerCase().includes(input.toLowerCase())) {
         if (option.label === currentValue.label) {
           filtered.push({ ...option, isSelected: true });
         } else {
-          filtered.push(option);
+          const labelWithMatch =
+            input !== ""
+              ? option.label
+                  .toLowerCase()
+                  .replace(
+                    input.toLowerCase(),
+                    `<span class="match__bold">${input}</span>`
+                  )
+              : option.label;
+
+          filtered.push({
+            value: option.value,
+            label: labelWithMatch,
+          });
         }
       }
       return filtered;
