@@ -8,8 +8,6 @@ interface SwitchProps {
 const Switch: React.FC<SwitchProps> = ({ checked = false, callback }) => {
   const [switched, setSwitch] = useState(checked);
   const sw = useRef<HTMLDivElement>(null);
-  console.log("hello", checked);
-
   useEffect(() => {
     setSwitch(checked);
   }, [checked]);

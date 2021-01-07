@@ -3,12 +3,14 @@
 import { Field, Form, Formik, useField, useFormikContext } from "formik";
 import router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import useSWR from "swr";
 import Checkbox from "../../../Components/FormsComponents/Checkbox";
 import Select, { Option } from "../../../Components/FormsComponents/Select";
 import "./style.scss";
 import { Router } from "../../../../i18n";
 import getAsString from "../../../../helpers/getAsString";
+import { setSubCategories } from "../../../../redux/actions/filterActions";
 
 const prices: Array<Option> = [
   {
@@ -36,17 +38,20 @@ const prices: Array<Option> = [
     label: "От 500$",
   },
 ];
-interface FilterProps {
+export interface InitialFilterValues {
   category: string;
-  initialSubcategories: Array<number>;
+  subcategories: Array<number>;
+  salary: number;
+}
+interface FilterProps {
+  initialFilterValues: InitialFilterValues;
   categories: Array<Option>;
   subCategories: Array<Option>;
 }
 
 const Filter: React.FC<FilterProps> = ({
-  category,
+  initialFilterValues,
   categories,
-  initialSubcategories,
   subCategories,
 }) => {
   const { query } = useRouter();
@@ -68,23 +73,12 @@ const Filter: React.FC<FilterProps> = ({
     // eslint-disable-next-line prefer-destructuring
     initialSalary = prices[0];
   }
-  const [initialVal] = useState({
-    category: getAsString(query.category) || "123",
-    subcategories:
-      query.subcategories
-        ?.toString()
-        .split(",")
-        .filter((x) => x !== "")
-        .map((x) => +x) || [],
-    salary: +getAsString(query.salary) || "0",
-  });
   return (
     <div className="jobs__filter">
       <div className="filter__inner">
         <Formik
-          initialValues={initialVal}
+          initialValues={initialFilterValues}
           onSubmit={async (values) => {
-            console.log(values.subcategories);
             const subcategories = values.subcategories.length
               ? values.subcategories.join(",")
               : null;
@@ -146,6 +140,7 @@ const Filter: React.FC<FilterProps> = ({
                   as={Select}
                   options={prices}
                   value={initialSalary}
+                  isSearchable={false}
                   onChange={(val) => {
                     setFieldValue("salary", val);
                     submitForm();
@@ -177,6 +172,7 @@ const SubCategories: React.FC<SubCategoriesProps> = ({
   subCategories,
   ...props
 }) => {
+  const dispatch = useDispatch();
   const { setFieldValue } = useFormikContext();
   const [field] = useField({
     name: props.name,
@@ -192,9 +188,11 @@ const SubCategories: React.FC<SubCategoriesProps> = ({
   );
 
   useEffect(() => {
-    if (!newModels?.map((a) => a.value).includes(field.value)) {
+    const onlyValues = newModels?.map((a) => a.value);
+    if (!onlyValues?.includes(field.value)) {
       setFieldValue(props.name, initialSub);
     }
+    dispatch(setSubCategories(newModels));
   }, [category, newModels]);
   if (newModels?.length) {
     return (

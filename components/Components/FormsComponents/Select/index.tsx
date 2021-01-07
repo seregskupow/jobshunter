@@ -52,7 +52,6 @@ const Select: React.FC<SelectProps> = ({
   onChange,
   ...props
 }) => {
-  console.log({ value });
   const selectBtn = useRef<HTMLInputElement | null>(null);
   const scrollContainer = useRef<HTMLInputElement | null>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -73,7 +72,7 @@ const Select: React.FC<SelectProps> = ({
     });
   };
   useEffect(() => {
-    hovered !== null && onChange(currentValue.value);
+    if (hovered !== null) onChange(currentValue.value);
   }, [currentValue]);
   useEffect(() => {
     // add when mounted

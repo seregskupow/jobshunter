@@ -16,12 +16,10 @@ function AccountBtn({ t }) {
   const isAuth: boolean = useSelector((state) => state.user.isAuthenticated);
   const userName: string = useSelector((state) => state.user.userName);
   const userAvatar: string = useSelector((state) => state.user.userAvatar);
-
   const [imgError, setImgError] = useState(false);
   const [open, setOpen] = useState(false);
-
+  const [userImage, setUserImg] = useState(null);
   const accBtn = useRef<HTMLDivElement>(null);
-  const dropdown = useRef();
   useEffect(() => {
     // add when mounted
     document.addEventListener("mousedown", handleClick);
@@ -36,7 +34,9 @@ function AccountBtn({ t }) {
       setImgError(true);
     };
     img.src = userAvatar;
-  }, [userAvatar, setImgError]);
+    setUserImg(userAvatar);
+    setImgError(false);
+  }, [userAvatar, setUserImg, setImgError]);
 
   const handleClick = (e) => {
     if (accBtn.current.contains(e.target)) {
@@ -50,10 +50,10 @@ function AccountBtn({ t }) {
   const UserBtn = () => {
     return (
       <div className="user__logged">
-        {userAvatar === "" || imgError === true ? (
+        {imgError === true ? (
           <ShortLogo userName={userName} />
         ) : (
-          <img src={userAvatar} alt="" />
+          <img src={userImage} alt="" />
         )}
         <span>{userName}</span>
       </div>

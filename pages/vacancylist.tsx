@@ -8,6 +8,7 @@ import deepEqual from "fast-deep-equal";
 import { TFunction } from "next-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import axios from "axios";
 import Layout, { variants } from "../components/Layout elements/Layout/Layout";
 import { withTranslation } from "../i18n";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -19,11 +20,14 @@ import MyGet from "./api/myGet";
 import VacancyCard, {
   VacancyCardProps,
 } from "../components/Components By Page/Vacancies components/VacancyCard";
-import Filter from "../components/Components By Page/Vacancies components/Filter";
+import Filter, {
+  InitialFilterValues,
+} from "../components/Components By Page/Vacancies components/Filter";
 import getAsString from "../helpers/getAsString";
 import { Option } from "../components/Components/FormsComponents/Select";
 import Search from "../components/Components/Search";
 import "../styles/pages/vacancylist.scss";
+import FilterActiveBadges from "../components/Components By Page/Vacancies components/FilterActiveBadges";
 
 interface vacancyListProps {
   vacancies: [];
@@ -32,47 +36,75 @@ interface vacancyListProps {
   subCategories: Array<Option>;
   initialSubcategories: Array<number>;
   errors: Array<string>;
+  serverQuery: string;
   readonly t: TFunction;
   Layout: any;
 }
 interface PageComponent<T> extends React.FC<T> {
   Layout: ReactNode;
 }
+
 const vacancylist: PageComponent<vacancyListProps> = ({
   vacancies,
   category,
   initialSubcategories,
   categories,
   subCategories,
+  serverQuery,
   errors,
   t,
 }) => {
   const { query } = useRouter();
-  const [serverQuery] = useState(query);
+  console.log({ query });
+  console.log({ server: serverQuery });
   const { data } = useSWR(`/jobs?${stringify(query)}`, {
-    dedupingInterval: 15000,
+    dedupingInterval: 2000,
     initialData: deepEqual(query, serverQuery) ? vacancies : undefined,
+  });
+  console.log({ deep: deepEqual(query, serverQuery) });
+  console.log({ data });
+  axios
+    .get(`/jobs?${stringify(query)}`, { withCredentials: true })
+    .then((data2) => console.log({ axios: data2.data }));
+
+  const [initialFilterValues] = useState<InitialFilterValues>({
+    category: getAsString(query.category) || "123",
+    subcategories:
+      query.subcategories
+        ?.toString()
+        .split(",")
+        .filter((x) => x !== "")
+        .map((x) => +x) || [],
+    salary: +getAsString(query.salary) || 0,
   });
   return (
     <MainContainer>
       <div className="banner">
         <h1 className="banner__title">Знайди роботу мрії</h1>
       </div>
+      <div className="m-y-20">
+        <Search />
+      </div>
+      <div className="m-y-20">
+        <FilterActiveBadges
+          categories={categories}
+          subCategories={subCategories}
+          initialFilterValues={initialFilterValues}
+        />
+      </div>
       <GridContainer>
         <GridColumn>
           <aside className="sticky__filter">
             <Panel padding={10}>
               <Filter
-                category={category}
                 categories={categories}
-                initialSubcategories={initialSubcategories}
                 subCategories={subCategories}
+                initialFilterValues={initialFilterValues}
               />
             </Panel>
           </aside>
         </GridColumn>
         <GridColumn>
-          <Search />
           <div className="" style={{ marginBottom: "10px" }}></div>
           <h2 style={{ color: "var(--color-contrast)" }}>
             Найдено вакансий: {data?.length}
@@ -103,6 +135,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     MyGet(`${process.env.SERVER}/api/categories`, ctx),
     MyGet(`${process.env.SERVER}/api/subcategories?category=${category}`, ctx),
   ]);
+  console.log("IM CALLED");
+
   return {
     props: {
       initialSubcategories: subCatArr,
@@ -110,6 +144,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       vacancies: vacancies.data,
       categories: categories.data,
       subCategories: subCategories.data,
+      serverQuery: ctx.query,
       errors: [vacancies.error, categories.error, subCategories.error],
       namespacesRequired: ["common", "vacancyListPage"],
     },
