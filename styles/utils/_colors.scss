@@ -5,6 +5,7 @@ $black: #030303;
 $lightBlack: #1d1d1d;
 $blue: #1a6dcf;
 $red: #eb5757;
+$red-rgb: 235, 87, 87;
 $lightRed: #ffebeb;
 $darkGrey: #8a8a8a;
 $yellow: #ffd369;
@@ -48,6 +49,9 @@ $lightTextLight: #374150;
     --color-text: #{$lightText};
     --dark-text: #222831;
     --text-light: #{$lightTextLight};
+
+    --color-red: #{$red};
+    --color-red-rgb: #{$red-rgb};
 }
 .dark {
     --color-primary: #{$darkPrimary};

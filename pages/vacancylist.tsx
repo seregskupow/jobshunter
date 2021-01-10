@@ -55,18 +55,10 @@ const vacancylist: PageComponent<vacancyListProps> = ({
   t,
 }) => {
   const { query } = useRouter();
-  console.log({ query });
-  console.log({ server: serverQuery });
   const { data } = useSWR(`/jobs?${stringify(query)}`, {
     dedupingInterval: 2000,
     initialData: deepEqual(query, serverQuery) ? vacancies : undefined,
   });
-  console.log({ deep: deepEqual(query, serverQuery) });
-  console.log({ data });
-  axios
-    .get(`/jobs?${stringify(query)}`, { withCredentials: true })
-    .then((data2) => console.log({ axios: data2.data }));
-
   const [initialFilterValues] = useState<InitialFilterValues>({
     category: getAsString(query.category) || "123",
     subcategories:
