@@ -38,7 +38,16 @@ const VacancyCard: React.FC<VacancyCardProps> = ({
       transition={{ duration: 0.2 }}
       className="vacancy__card"
     >
-      <Link href="#">
+      <Link
+        Link
+        href={{
+          pathname: "/vacancy/[id]",
+          query: {
+            id,
+          },
+        }}
+        as={`/vacancy/${id}`}
+      >
         <a>
           <div className="vacancy__card__body">
             <button type="button" className="btn__save btn__click">

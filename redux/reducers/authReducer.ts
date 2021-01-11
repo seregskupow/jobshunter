@@ -45,6 +45,8 @@ export default (state = DEFAULT_STATE, { type, payload }: action) => {
       return { ...state, isAuthenticated: false, errorMessage: "" };
     case t.AUTH_ERROR:
       return { ...state, isLoading: false, errorMessage: payload };
+    case t.SET_SEARCH_KEYWORD:
+      return { ...state, lastSearchKey: payload };
     default:
       return state;
   }

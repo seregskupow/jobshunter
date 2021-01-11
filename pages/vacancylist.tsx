@@ -1,4 +1,4 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { GetServerSideProps } from "next";
 
 import useSWR from "swr";
 import { useRouter } from "next/router";
@@ -9,6 +9,7 @@ import { TFunction } from "next-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
 import Layout, { variants } from "../components/Layout elements/Layout/Layout";
 import { withTranslation } from "../i18n";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -28,6 +29,7 @@ import { Option } from "../components/Components/FormsComponents/Select";
 import Search from "../components/Components/Search";
 import "../styles/pages/vacancylist.scss";
 import FilterActiveBadges from "../components/Components By Page/Vacancies components/FilterActiveBadges";
+import Pagination from "../components/Components/Pagination";
 
 interface vacancyListProps {
   vacancies: [];
@@ -38,6 +40,7 @@ interface vacancyListProps {
   errors: Array<string>;
   serverQuery: string;
   readonly t: TFunction;
+  pageCount: number;
   Layout: any;
 }
 interface PageComponent<T> extends React.FC<T> {
@@ -48,6 +51,7 @@ const vacancylist: PageComponent<vacancyListProps> = ({
   vacancies,
   category,
   initialSubcategories,
+  pageCount,
   categories,
   subCategories,
   serverQuery,
@@ -57,10 +61,13 @@ const vacancylist: PageComponent<vacancyListProps> = ({
   const { query } = useRouter();
   const { data } = useSWR(`/jobs?${stringify(query)}`, {
     dedupingInterval: 2000,
-    initialData: deepEqual(query, serverQuery) ? vacancies : undefined,
+    initialData: deepEqual(query, serverQuery)
+      ? { vacancies, pageCount }
+      : undefined,
   });
+  console.log(data);
   const [initialFilterValues] = useState<InitialFilterValues>({
-    category: getAsString(query.category) || "123",
+    category: getAsString(query.category) || "0",
     subcategories:
       query.subcategories
         ?.toString()
@@ -99,16 +106,19 @@ const vacancylist: PageComponent<vacancyListProps> = ({
         <GridColumn>
           <div className="" style={{ marginBottom: "10px" }}></div>
           <h2 style={{ color: "var(--color-contrast)" }}>
-            Найдено вакансий: {data?.length}
+            Найдено вакансий: {data?.vacancies?.length}
           </h2>
+          <Pagination pageCount={data?.pageCount} />
           <div className="" style={{ marginBottom: "20px" }}></div>
           <AnimatePresence>
-            {data?.map((item: VacancyCardProps) => (
+            {data?.vacancies?.map((item: VacancyCardProps) => (
               <VacancyCard key={Math.random()} {...item} />
             ))}
           </AnimatePresence>
+          <Pagination pageCount={data?.pageCount} />
         </GridColumn>
       </GridContainer>
+      <div className="m-20">w</div>
     </MainContainer>
   );
 };
@@ -133,7 +143,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     props: {
       initialSubcategories: subCatArr,
       category: category || null,
-      vacancies: vacancies.data,
+      vacancies: vacancies?.data.vacancies,
+      pageCount: vacancies?.data.pageCount,
       categories: categories.data,
       subCategories: subCategories.data,
       serverQuery: ctx.query,

@@ -1,8 +1,11 @@
+import Layout from "../../components/Layout elements/Layout/Layout";
 import { withTranslation } from "../../i18n";
 
-export default function Vacancy(props) {
+const Vacancy = (props) => {
   return <div>vacancy № {props.id}</div>;
-}
+};
+Vacancy.Layout = Layout;
+export default Vacancy;
 export async function getStaticPaths() {
   return {
     paths: [{ params: { id: "544" } }],

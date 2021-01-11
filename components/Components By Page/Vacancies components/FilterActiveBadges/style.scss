@@ -6,7 +6,7 @@
   display: inline-flex;
   align-items: center;
   padding: 5px 8px;
-  margin: 5px 5px 0 0;
+  margin: 8px 8px 0 0;
 
   color: var(--color-text);
   background-color: var(--color-field);
@@ -37,4 +37,10 @@
 }
 .filter-badge__clear-all {
   border-color: var(--color-red);
+
+  background-color: rgba(var(--color-red-rgb), 0.2);
+
+  &:hover {
+    background-color: var(--color-red);
+  }
 }

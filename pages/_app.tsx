@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { SWRConfig } from "swr";
 import axios from "axios";
 import { useStore, initializeStore } from "../redux/store";
-import { appWithTranslation } from "../i18n";
+import { appWithTranslation, Router } from "../i18n";
 import { loginUser } from "../redux/actions/authAction";
 import checkAuth from "../helpers/checkAuth";
 
@@ -22,13 +22,23 @@ const MyApp = ({ Component, pageProps }) => {
     const theme: string = localStorage.getItem("theme");
     document.body.classList.add(theme);
   }, []);
+  const customFetcher = (url: string) => {
+    return axios(url, {
+      withCredentials: true,
+    })
+      .then((r) => r.data)
+      .catch((error) => {
+        if (error.response.status === 401) {
+          Router.push({
+            pathname: "/auth/login",
+          });
+        }
+      });
+  };
   return (
     <SWRConfig
       value={{
-        fetcher: (url: string) =>
-          axios(url, {
-            withCredentials: true,
-          }).then((r) => r.data),
+        fetcher: customFetcher,
       }}
     >
       <Provider store={store}>

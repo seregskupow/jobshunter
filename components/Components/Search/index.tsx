@@ -2,28 +2,26 @@ import "./style.scss";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { GoSearch } from "react-icons/go";
 import { withTranslation, Router } from "../../../i18n";
 import SettingsIcon from "../../../public/images/icons/search/setting-lines.svg";
 import Tooltip from "../Tooltip";
+import { SET_SEARCH_KEYWORD } from "../../../redux/types";
 
 function Search({ t }) {
   const router = useRouter();
+  const dispatch = useDispatch();
   const defaultSearchParam = useSelector((state) => state.user.lastSearchKey);
-  const searchParam =
-    router.query.search === undefined
-      ? defaultSearchParam
-      : router.query.search;
-  const [searchValue, setSearch] = useState(searchParam);
-  const onInputChange = (value: string) => {
+  let search: string;
+  const [searchValue, setSearch] = useState(search);
+  const onInputChange = async (value: string) => {
     setSearch(value);
   };
   useEffect(() => {
-    if (defaultSearchParam !== undefined) {
-      setSearch(defaultSearchParam);
-    }
-  }, [defaultSearchParam, setSearch]);
+    search = Router.query.search ? Router.query.search : defaultSearchParam;
+    setSearch(search);
+  }, []);
   const onSearchSubmit = (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();
     Router.push({

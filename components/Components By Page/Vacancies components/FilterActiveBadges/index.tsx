@@ -45,26 +45,29 @@ const FilterActiveBadges: React.FC<ActiveFiltersProps> = ({
     <div className="filter-badges-container">
       {(initialFilterValues?.subcategories.length ||
         initialFilterValues?.salary !== 0 ||
-        initialFilterValues.category) && (
+        +initialFilterValues.category !== 0) && (
         <Link href="/vacancylist">
           <a className="filter-badge btn__click filter-badge__clear-all">
             Очистити фільтер
           </a>
         </Link>
       )}
-      {categories
-        ?.filter(
-          (item) =>
-            item.value.toString() === initialFilterValues.category.toString()
-        )
-        .map((badge) => (
-          <Badge
-            key={Math.random()}
-            onClick={() => redirectTo("category", badge.value.toString(10))}
-            text={badge.label}
-            value={badge.value}
-          />
-        ))}
+      {+initialFilterValues.category !== 0 &&
+        categories
+          ?.filter(
+            (item) =>
+              item.value.toString() === initialFilterValues.category.toString()
+          )
+          .map((badge) => (
+            <Link href="/vacancylist" key={Math.random()}>
+              <a className="filter-badge btn__click">
+                {badge.label}
+                <span>
+                  <FaTimes />
+                </span>
+              </a>
+            </Link>
+          ))}
       {subs
         ?.filter((item) =>
           initialFilterValues.subcategories.includes(item.value)
