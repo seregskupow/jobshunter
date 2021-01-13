@@ -1,0 +1,8 @@
+.typewrite {
+  font-size: 6rem;
+  text-align: center;
+  text-transform: uppercase;
+  & .wrap {
+    border-right: 0.08em solid #fff;
+  }
+}

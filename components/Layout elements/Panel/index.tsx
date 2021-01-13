@@ -7,7 +7,7 @@ type panelProps = {
   width?: number | "auto";
   margin?: number;
 };
-export default function WhitePanel({
+export default function Panel({
   children,
   padding = 15,
   width = "auto",

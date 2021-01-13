@@ -5,7 +5,32 @@ import MainContainer from "../components/Layout elements/MainContainer";
 import GridContainer from "../components/Layout elements/GridContainer/GridContainer";
 import GridColumn from "../components/Layout elements/GridContainer/GridColumn";
 import WhitePanel from "../components/Layout elements/Panel";
+import "../styles/pages/homePage.scss";
+import Search from "../components/Components/Search";
+import TypeWriter from "../components/Components/TypeWriter";
 
+const categoryLinks = [
+  {
+    title: "Містом",
+    img: "/images/homepage/searchBy/city.jpg",
+    link: "#",
+  },
+  {
+    title: "Рубрикою",
+    img: "/images/homepage/searchBy/rubric.jpg",
+    link: "#",
+  },
+  {
+    title: "Професією",
+    img: "/images/homepage/searchBy/profession.jpg",
+    link: "#",
+  },
+  {
+    title: "Графіком",
+    img: "/images/homepage/searchBy/time.jpg",
+    link: "#",
+  },
+];
 function Home({ t }) {
   console.log("Index rendered");
   return (
@@ -16,41 +41,42 @@ function Home({ t }) {
       exit="exit"
       transition={{ duration: 0.5 }}
     >
-      <MainContainer>
-        <h1>{t("common:title")}</h1>
-        <h2>{t("indexPage:header")}</h2>
-        <Link href="/blog/blog2">
-          <a>index</a>
-        </Link>
-        <GridContainer>
-          <GridColumn>
-            <WhitePanel width={100}>
-              <p style={{ fontSize: "2rem" }}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-                sed sit autem, impedit inventore necessitatibus illo, ut rem
-                laborum exercitationem suscipit quas vitae doloribus enim?
-                Aliquid, suscipit, molestiae nam temporibus vel voluptatum
-                eligendi, natus unde reiciendis eum labore accusamus ex
-                perferendis exercitationem ipsum! Perferendis, molestias?
-                Consequatur pariatur quaerat quod quisquam?
-              </p>
-            </WhitePanel>
-          </GridColumn>
-          <GridColumn>
-            <WhitePanel width={100}>
-              <p style={{ fontSize: "2rem" }}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Reprehenderit optio quam doloremque eos, molestias iste culpa
-                assumenda praesentium labore nulla iusto quas perspiciatis qui
-                nihil voluptatum recusandae est facere magnam eius natus nam
-                nemo repudiandae quibusdam saepe. Illum architecto earum
-                pariatur? Voluptas, voluptatibus suscipit. Architecto ad
-                reiciendis sint. Sit, magni?
-              </p>
-            </WhitePanel>
-          </GridColumn>
-        </GridContainer>
-      </MainContainer>
+      <section className="header">
+        <MainContainer>
+          <div className="mb-20">
+            <TypeWriter
+              text={[
+                "Ти можеш бути ким захочеш",
+                "Обери професію мрії",
+                "Досягни успіху",
+                "Зростай професійно",
+              ]}
+            />
+          </div>
+          <Search />
+        </MainContainer>
+      </section>
+      <section className="search-by">
+        <h2>Шукай професію за...</h2>
+        <div className="categories__links__container">
+          {categoryLinks.map(({ title, img, link }, index) => (
+            <motion.div
+              initial={{ y: 50 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 * index }}
+              key={title}
+              className="category__link__wrapper"
+            >
+              <Link href={link}>
+                <a className="category__link btn__click">
+                  <img src={img} alt="" />
+                  <span>{title}</span>
+                </a>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
     </motion.div>
   );
 }

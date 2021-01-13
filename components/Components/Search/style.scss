@@ -1,10 +1,12 @@
 @import "../../../styles/utils/colors";
 @import "../../../styles/utils/borders";
 @import "../../../styles/utils/shadows";
+
+$searchHeight: 58px;
 .search {
     flex-grow: 1;
     margin: 0 15px;
-    max-height: 40px;
+    max-height: $searchHeight;
     & form {
         display: inline-flex;
 
@@ -13,8 +15,8 @@
             margin-left: 15px;
         }
         & .settings__btn {
-            height: 40px;
-            width: 40px;
+            height: $searchHeight;
+            width: $searchHeight;
 
             display: flex;
             align-items: center;
@@ -50,25 +52,29 @@
     position: relative;
 
     & input[type="search"] {
-        height: 40px;
+        height: $searchHeight;
         width: 100%;
 
         font-size: 18px;
 
-        background-color: var(--color-field);
+        color: var(--color-text);
+
+        background-color: rgba(#{var(--color-field-rgb)}, 0.7);
 
         border: 1px solid var(--color-border);
         border-radius: 37px;
 
-        padding: 0 0 0 15px;
+        padding: 0 0 0 25px;
 
         box-shadow: none;
 
         transition: all 0.3s ease;
 
+        backdrop-filter: blur(7px);
+
         position: relative;
         &:focus {
-            background-color: $white;
+            background-color: rgba(#{var(--color-field-rgb)}, 1);
             box-shadow: $smallShadow;
             border-color: var(--color-contrast);
         }
@@ -80,7 +86,7 @@
         right: 1px;
 
         height: calc(100% - 2px);
-        padding: 0 20px;
+        padding: 0 calc(#{$searchHeight} / 2);
 
         display: flex;
         align-items: center;

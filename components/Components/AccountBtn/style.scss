@@ -12,7 +12,7 @@
     border: 1px solid var(--color-border);
     border-radius: 8px;
 
-    color: $white;
+    color: var(--color-text);
     font-size: 20px;
     overflow: hidden;
     cursor: pointer;
@@ -53,7 +53,7 @@
         width: 40px;
         line-height: 40px;
         font-family: "Rubik Mono One", sans-serif;
-        color: $white;
+        color: var(--color-text);
         -webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: black;
         background-color: $black;
@@ -63,6 +63,7 @@
         font-weight: 400;
     }
     & span {
+        color: var(--color-text);
         margin: 0 5px;
         font-size: 1.8rem;
         text-transform: capitalize;

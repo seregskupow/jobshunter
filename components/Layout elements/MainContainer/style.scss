@@ -1,4 +1,8 @@
 @import "../../../styles/utils/media";
+.main__container {
+    width: 100%;
+    margin: 0 auto;
+}
 .main__container_inner {
     width: 95%;
     max-width: 1280px;

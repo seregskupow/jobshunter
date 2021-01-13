@@ -79,6 +79,15 @@ const vacancylist: PageComponent<vacancyListProps> = ({
   return (
     <MainContainer>
       <div className="banner">
+        <div className="banner__img__container">
+          <LazyLoadImage
+            className="banner__img"
+            style={{ transform: "scale(1.3)" }}
+            src="/images/banners/vacancy_banner.png"
+            effect="blur"
+          />
+        </div>
+
         <h1 className="banner__title">Знайди роботу мрії</h1>
       </div>
       <div className="m-y-20">
