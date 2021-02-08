@@ -62,6 +62,7 @@ const Select: React.FC<SelectProps> = ({
   const downPress = useKeyPress("ArrowDown", selectBtn);
   const upPress = useKeyPress("ArrowUp", selectBtn);
   const enterPress = useKeyPress("Enter", selectBtn);
+  // Syncronise cursor with selected value
   const [cursor, setCursor] = useState<number>(0);
   const [hovered, setHovered] = useState<ExtendedOption>(null);
   const setCurrentOption = (opt) => {
@@ -71,9 +72,9 @@ const Select: React.FC<SelectProps> = ({
       label: opt.label.replace(/<\/?[^>]+(>|$)/g, ""),
     });
   };
-  useEffect(() => {
-    if (hovered !== null) onChange(currentValue.value);
-  }, [currentValue]);
+  // useEffect(() => {
+  //   if (hovered !== null) onChange(currentValue.value);
+  // }, [currentValue]);
   useEffect(() => {
     // add when mounted
     document.addEventListener("mousedown", handleClick);
@@ -114,6 +115,7 @@ const Select: React.FC<SelectProps> = ({
   useEffect(() => {
     if (controlledOptions.length && enterPress) {
       setCurrentOption(controlledOptions[cursor]);
+      onChange(controlledOptions[cursor].value);
     }
   }, [cursor, enterPress]);
   // Close dropdown when value changed
@@ -196,6 +198,7 @@ const Select: React.FC<SelectProps> = ({
                   callback={(val) => {
                     setCurrentOption(val);
                     setOpen(false);
+                    onChange(val.value);
                   }}
                 />
               ))}

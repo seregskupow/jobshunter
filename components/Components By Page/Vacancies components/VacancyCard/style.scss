@@ -1,3 +1,5 @@
+@import "../../../../styles//utils/media";
+
 .vacancy__card {
   background-color: var(--color-primary);
 
@@ -109,9 +111,14 @@
   }
 
   & .short__description {
+    display: none;
     color: var(--text-light);
 
     font-size: 1.4rem;
+
+    @include media("sm") {
+      display: block;
+    }
 
     & .dots {
       line-height: 1.4rem;
@@ -125,6 +132,7 @@
 
   & .benefits {
     display: flex;
+    flex-wrap: wrap;
 
     & .benefit__item {
       color: var(--color-contrast);
@@ -139,6 +147,8 @@
       border-radius: 20px;
 
       margin: 10px 5px 0 0;
+
+      white-space: nowrap;
     }
   }
 }

@@ -80,6 +80,8 @@ button:focus {
         z-index: -1;
 
         & span {
+            display: inline-block;
+            height: 100%;
             width: 100%;
         }
 

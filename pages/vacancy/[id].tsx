@@ -95,7 +95,8 @@ const Vacancy = ({ id, vacancy, companyDescription }) => {
                   alt={companyDescription?.name}
                   className="banner__img"
                   src="https://i.work.ua/employer_design/8/4/0/101840_page_company_header_30.png"
-                  effect="blur"
+                  // effect="blur"
+                  placeholderSrc="/images/error/error_placeholder.png"
                 />
               </div>
             </div>

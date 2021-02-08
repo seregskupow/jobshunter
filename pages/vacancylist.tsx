@@ -65,7 +65,7 @@ const vacancylist: PageComponent<vacancyListProps> = ({
       ? { vacancies, pageCount }
       : undefined,
   });
-  console.log(data);
+  console.log({ e: data });
   const [initialFilterValues] = useState<InitialFilterValues>({
     category: getAsString(query.category) || "0",
     subcategories:
@@ -146,14 +146,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     MyGet(`${process.env.SERVER}/api/categories`, ctx),
     MyGet(`${process.env.SERVER}/api/subcategories?category=${category}`, ctx),
   ]);
+  console.log({ a: vacancies });
   console.log("IM CALLED");
 
   return {
     props: {
       initialSubcategories: subCatArr,
       category: category || null,
-      vacancies: vacancies?.data.vacancies,
-      pageCount: vacancies?.data.pageCount,
+      vacancies: vacancies?.data?.vacancies,
+      pageCount: vacancies?.data?.pageCount,
       categories: categories.data,
       subCategories: subCategories.data,
       serverQuery: ctx.query,
